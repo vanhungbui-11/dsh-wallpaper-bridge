@@ -16,6 +16,28 @@ DSH Wallpaper Bridge 是本地桥接插件，不是壁纸资源库，也不替�
 
 项目不会下载、解锁、分享或分发 Wallpaper Engine 的工坊资源。壁纸的授权、订阅与内容合规由使用者自行负责。
 
+## 插件界面
+
+插件以 Cordis 入口为中心工作：启动后在 DSH 侧栏提供“壁纸”入口，同时显示可收起的悬浮控制面板。用户无需离开当前会话，即可浏览本机壁纸、注入背景、切换声音并调整画面效果。
+
+### 主面板与背景注入
+
+![DSH Wallpaper Bridge 主面板、悬浮控制和背景注入效果](docs/images/plugin-overview.png)
+
+### 本机壁纸集合与实时调节
+
+壁纸集合只索引当前电脑中用户已安装的内容，可按类型搜索和筛选；右侧工具面板用于调节滤镜、光照、色彩与画面材质，效果会与设置页保持同步。
+
+| 滤镜与光照 | 画面与材质 |
+|---|---|
+| ![插件壁纸集合及滤镜和光照控制](docs/images/plugin-library-filters.png) | ![插件壁纸集合及画面和材质控制](docs/images/plugin-library-canvas.png) |
+
+### DSH 设置页集成
+
+![DSH 设置页中的 Wallpaper Bridge 插件开关、声音选项和背景预览](docs/images/plugin-settings.png)
+
+> 截图中的壁纸和缩略图仅用于展示插件界面，来自截图设备上由用户自行安装的第三方内容，不包含在本仓库或 Release 安装包中。
+
 ## 版本状态
 
 当前发布版本：**0.3.0**
@@ -148,6 +170,7 @@ npm run package:full
 ├── release.ps1                   # 生成轻量包/完整包
 ├── package.json                  # 命令与版本
 ├── titles.json                   # 可公开的标题覆盖
+├── docs/images/                  # README 插件界面截图
 ├── dsh/
 │   ├── plugin.host.js            # Cordis Host 插件
 │   ├── plugin.client.js          # 悬浮窗与设置 UI

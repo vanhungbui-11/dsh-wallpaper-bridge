@@ -12,4 +12,4 @@ The full release retains package-provided `LICENSE`, `NOTICE`, `COPYING`, and re
 
 ## Wallpaper Engine content
 
-Wallpaper Engine and Steam Workshop content are not included. Users must install Wallpaper Engine and obtain any wallpaper content through their own licensed Steam account.
+Wallpaper Engine and Steam Workshop content are not included. Users must install Wallpaper Engine and obtain any wallpaper content through their own licensed Steam account. Wallpaper thumbnails visible in documentation screenshots are interface examples only and are not distributed as standalone content.
