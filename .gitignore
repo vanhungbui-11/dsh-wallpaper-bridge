@@ -1,0 +1,39 @@
+# Local runtime state and wallpaper inventory
+runtime.json
+wallpapers.json
+titles.local.json
+we.config.json
+cache/
+dist/
+prototype/
+
+# Secrets, credentials, sessions and logs
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*cookie*
+*credentials*
+*secret*
+*.jsonl
+*.log
+
+# Node, build and operating-system files
+node_modules/
+coverage/
+.nyc_output/
+.tmp/
+tmp/
+temp/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Generated DSH files containing local absolute paths
+dsh/plugin.host.ready.js
+dsh/plugin.client.ready.js
+.dsh-filess/
+wallpaper-backups/

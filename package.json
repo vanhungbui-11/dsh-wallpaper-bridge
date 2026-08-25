@@ -1,0 +1,48 @@
+{
+  "name": "dsh-wallpaper-bridge",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Wallpaper Engine 桥接 CLI（零依赖）：playInWindow 窗口模式控制订阅壁纸，供 DSH 插件调用",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanhungbui-11/dsh-wallpaper-bridge.git"
+  },
+  "homepage": "https://github.com/vanhungbui-11/dsh-wallpaper-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/vanhungbui-11/dsh-wallpaper-bridge/issues"
+  },
+  "main": "we.js",
+  "bin": {
+    "we": "we.js"
+  },
+  "scripts": {
+    "install:plugin": "node install.js",
+    "check": "node dsh/check-privacy.js && node dsh/check-client.js && node dsh/check-host.js && node dsh/check-wallpaper-bootstrap.js && node dsh/check-installer.js",
+    "check:release": "node dsh/check-release.js",
+    "package:portable": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File release.ps1",
+    "package:full": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File release.ps1 -Full",
+    "detect": "node we.js detect",
+    "scan": "node we.js scan",
+    "list": "node we.js list",
+    "calibrate": "node we.js calibrate"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dsh/",
+    "!dsh/*.ready.js",
+    "we-tools/",
+    "install.cmd",
+    "install.ps1",
+    "install.js",
+    "native-scene-bridge.js",
+    "package.json",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md",
+    "release.ps1",
+    "titles.json",
+    "we.js"
+  ],
+  "license": "MIT"
+}
