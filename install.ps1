@@ -64,6 +64,17 @@ function New-HarnessShortcut([string]$Harness, [string]$LinkPath) {
   $shortcut.Save()
 }
 
+function New-UpdateShortcut([string]$Updater, [string]$LinkPath) {
+  $parent = Split-Path -Parent $LinkPath
+  New-Item -ItemType Directory -Path $parent -Force | Out-Null
+  $shell = New-Object -ComObject WScript.Shell
+  $shortcut = $shell.CreateShortcut($LinkPath)
+  $shortcut.TargetPath = $Updater
+  $shortcut.WorkingDirectory = Split-Path -Parent $Updater
+  $shortcut.IconLocation = (Join-Path $env:SystemRoot 'System32\shell32.dll') + ',238'
+  $shortcut.Save()
+}
+
 try {
   $bundle = Join-Path $root 'DeepSeek Harness'
   $defaultTarget = Join-Path $env:LOCALAPPDATA 'Programs\DeepSeek Harness Wallpaper'
@@ -92,9 +103,19 @@ try {
   if ($DshHome) { $env:DSH_HOME = [IO.Path]::GetFullPath($DshHome) }
   $env:DSH_NODE_EXE = [IO.Path]::GetFullPath($node)
   if ($harness) { $env:DSH_INSTALL_DIR = [IO.Path]::GetFullPath($harness) }
+  if ($env:DSH_WALLPAPER_INSTALL_DIR) {
+    $runtimeDir = [IO.Path]::GetFullPath($env:DSH_WALLPAPER_INSTALL_DIR)
+  } else {
+    $runtimeDir = Join-Path $env:LOCALAPPDATA 'DSHWallpaperBridge\current'
+  }
+  $env:DSH_WALLPAPER_INSTALL_DIR = $runtimeDir
 
   & $node (Join-Path $root 'install.js')
   if ($LASTEXITCODE -ne 0) { throw "Plugin installer exited with code $LASTEXITCODE" }
+
+  if (-not $NoShortcut) {
+    New-UpdateShortcut (Join-Path $runtimeDir 'update.cmd') (Join-Path ([Environment]::GetFolderPath('Programs')) 'Update DSH Wallpaper Bridge.lnk')
+  }
 
   if ($harness) {
     if (-not $NoShortcut) {

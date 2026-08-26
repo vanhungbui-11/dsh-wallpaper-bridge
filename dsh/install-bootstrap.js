@@ -76,8 +76,11 @@ function copyTree(source, target) {
 function installRuntime() {
   if (RUNTIME === path.parse(RUNTIME).root) throw new Error('拒绝把运行目录设为磁盘根目录')
   fs.mkdirSync(RUNTIME, { recursive: true })
+  fs.mkdirSync(path.join(RUNTIME, 'cache'), { recursive: true })
   copyRuntimeFile(path.join(ROOT, 'we.js'), path.join(RUNTIME, 'we.js'))
   copyRuntimeFile(path.join(ROOT, 'native-scene-bridge.js'), path.join(RUNTIME, 'native-scene-bridge.js'))
+  copyRuntimeFile(path.join(ROOT, 'update.cmd'), path.join(RUNTIME, 'update.cmd'))
+  copyRuntimeFile(path.join(ROOT, 'update.ps1'), path.join(RUNTIME, 'update.ps1'))
   copyTree(path.join(ROOT, 'we-tools'), path.join(RUNTIME, 'we-tools'))
 
   const targetTitles = path.join(RUNTIME, 'titles.json')
@@ -89,7 +92,7 @@ function installRuntime() {
   fs.writeFileSync(targetTitles, JSON.stringify(Object.assign({}, shippedTitles, localTitles), null, 2), 'utf8')
   const sourceConfig = path.join(ROOT, 'we.config.json')
   if (!fs.existsSync(path.join(RUNTIME, 'we.config.json')) && fs.existsSync(sourceConfig)) copyRuntimeFile(sourceConfig, path.join(RUNTIME, 'we.config.json'), false)
-  fs.writeFileSync(path.join(RUNTIME, 'install.json'), JSON.stringify({ version: VERSION, installedAt: new Date().toISOString(), source: norm(ROOT) }, null, 2), 'utf8')
+  fs.writeFileSync(path.join(RUNTIME, 'install.json'), JSON.stringify({ version: VERSION, installedAt: new Date().toISOString() }, null, 2), 'utf8')
 }
 
 function installedHost() {
@@ -150,6 +153,8 @@ function prepareCatalog() {
 function verifyInstall() {
   const files = [
     path.join(RUNTIME, 'we.js'), path.join(RUNTIME, 'native-scene-bridge.js'),
+    path.join(RUNTIME, 'update.cmd'), path.join(RUNTIME, 'update.ps1'),
+    path.join(RUNTIME, 'cache'),
     path.join(RUNTIME, 'we-tools', 'capture.exe'), path.join(RUNTIME, 'we-tools', 'SceneLayerHost.cs'),
     path.join(PLUGINS, 'wallpaper.host.js'), path.join(PLUGINS, 'wallpaper.client.js'), BOOTSTRAP, PATCH,
   ]

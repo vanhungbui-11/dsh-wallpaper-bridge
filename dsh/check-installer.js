@@ -21,7 +21,7 @@ function copy(relative) {
 }
 
 try {
-  for (const item of ['install.js', 'package.json', 'native-scene-bridge.js', 'titles.json', 'we.js', 'we-tools', 'dsh/install-bootstrap.js', 'dsh/plugin.host.js', 'dsh/plugin.client.js', 'dsh/wallpaper-bootstrap.js']) copy(item)
+  for (const item of ['install.js', 'package.json', 'native-scene-bridge.js', 'titles.json', 'update.cmd', 'update.ps1', 'we.js', 'we-tools', 'dsh/install-bootstrap.js', 'dsh/plugin.host.js', 'dsh/plugin.client.js', 'dsh/wallpaper-bootstrap.js']) copy(item)
   fs.writeFileSync(path.join(source, 'wallpapers.json'), JSON.stringify({ appId: '431960', count: 1, items: [{ id: 'must-not-copy' }] }))
   fs.mkdirSync(profile, { recursive: true })
   fs.writeFileSync(path.join(profile, 'cordis.patch.yml'), "- insert:\n    - id: keep-me\n      name: './keep-me.js'\n- insert:\n    - id: dev-plugins-bootstrap2\n      name: './dev-plugins-bootstrap2.js'\n")
@@ -55,6 +55,12 @@ try {
   assert.ok(!host.includes(source.replace(/\\/g, '/')), 'Host 不得引用解压源目录')
   assert.ok(fs.existsSync(path.join(runtime, 'we-tools', 'SceneLayerHost.cs')), '原生场景 Helper 源码必须安装')
   assert.ok(fs.existsSync(path.join(runtime, 'we-tools', 'capture.exe')), '捕获工具必须安装')
+  assert.ok(fs.existsSync(path.join(runtime, 'update.cmd')), '一键更新入口必须安装到稳定运行目录')
+  assert.ok(fs.existsSync(path.join(runtime, 'update.ps1')), '更新脚本必须安装到稳定运行目录')
+  assert.ok(fs.statSync(path.join(runtime, 'cache')).isDirectory(), '实时场景捕获缓存目录必须安装')
+  const installInfo = JSON.parse(fs.readFileSync(path.join(runtime, 'install.json'), 'utf8'))
+  assert.equal(installInfo.version, require(path.join(root, 'package.json')).version, '安装版本必须写入本地清单')
+  assert.ok(!Object.hasOwn(installInfo, 'source'), '本地清单不得保存解压源绝对路径')
   const manifest = JSON.parse(fs.readFileSync(path.join(runtime, 'wallpapers.json'), 'utf8'))
   assert.equal(manifest.count, 0, '不得把打包机器的壁纸清单复制到新设备')
   assert.ok(fs.existsSync(path.join(profile, 'wallpaper-backups')), '迁移旧配置时必须创建备份')

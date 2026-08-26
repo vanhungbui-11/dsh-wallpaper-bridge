@@ -1,6 +1,6 @@
 {
   "name": "dsh-wallpaper-bridge",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "Wallpaper Engine 桥接 CLI（零依赖）：playInWindow 窗口模式控制订阅壁纸，供 DSH 插件调用",
   "repository": {
@@ -17,10 +17,11 @@
   },
   "scripts": {
     "install:plugin": "node install.js",
-    "check": "node dsh/check-privacy.js && node dsh/check-client.js && node dsh/check-host.js && node dsh/check-wallpaper-bootstrap.js && node dsh/check-installer.js",
+    "check": "node dsh/check-privacy.js && node dsh/check-client.js && node dsh/check-host.js && node dsh/check-wallpaper-bootstrap.js && node dsh/check-updater.js && node dsh/check-installer.js",
     "check:release": "node dsh/check-release.js",
+    "check:full-local": "set DSH_CHECK_FULL_INSTALL=1&& node dsh/check-release.js",
     "package:portable": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File release.ps1",
-    "package:full": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File release.ps1 -Full",
+    "package:full": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File release.ps1 -Full -AllowBundledRuntimeDependencies",
     "detect": "node we.js detect",
     "scan": "node we.js scan",
     "list": "node we.js list",
@@ -36,6 +37,8 @@
     "install.cmd",
     "install.ps1",
     "install.js",
+    "update.cmd",
+    "update.ps1",
     "native-scene-bridge.js",
     "package.json",
     "README.md",

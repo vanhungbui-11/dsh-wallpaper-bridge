@@ -5,6 +5,7 @@ titles.local.json
 we.config.json
 cache/
 dist/
+dist-local/
 prototype/
 
 # Secrets, credentials, sessions and logs
@@ -15,6 +16,8 @@ prototype/
 *.key
 *.pfx
 *.p12
+.npmrc
+.netrc
 *cookie*
 *credentials*
 *secret*

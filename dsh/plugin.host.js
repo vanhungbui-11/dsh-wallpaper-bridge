@@ -284,11 +284,13 @@ return {
           path: '/wallpaper-capture',
           async handler(req, res) {
             try {
-              const requestUrl = new URL(String(req.url || ''), 'http://localhost')
-              const pathname = requestUrl.pathname
+              const requestUrl = String(req.url || '')
+              const queryAt = requestUrl.indexOf('?')
+              const pathname = queryAt < 0 ? requestUrl : requestUrl.slice(0, queryAt)
               const id = decodeURIComponent(pathname.slice('/wallpaper-capture/'.length))
               if (!/^[A-Za-z0-9._-]+$/.test(id)) { res.writeHead(400); res.end('bad id'); return }
-              const windowName = requestUrl.searchParams.get('window') || ('dsh-we-' + id)
+              const windowParam = (queryAt < 0 ? '' : requestUrl.slice(queryAt + 1)).match(/(?:^|&)window=([^&]*)/)
+              const windowName = windowParam ? decodeURIComponent(windowParam[1].replace(/\+/g, ' ')) : ('dsh-we-' + id)
               if (!/^dsh-we-[A-Za-z0-9._-]+$/.test(windowName)) { res.writeHead(400); res.end('bad window'); return }
               const fs = ctx.get('fs')
               const subprocess = ctx.get('subprocess')
@@ -311,6 +313,7 @@ return {
               res.writeHead(200, { 'Content-Type': 'image/jpeg', 'Cache-Control': 'no-store' })
               res.end(bytes)
             } catch (e) {
+              console.error('wallpaper: 场景捕获失败: ' + (e && e.stack ? e.stack : String(e)))
               try { res.writeHead(500); res.end('error') } catch (err) { /* ignore */ }
             }
           },

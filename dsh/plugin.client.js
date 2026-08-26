@@ -125,13 +125,27 @@ html[data-wp-ui-tint-all] body {
 .wp-control-buttons .wp-btn { flex: 1 1 0; min-width: 0; padding-left: 8px; padding-right: 8px; white-space: nowrap; }
 .wp-control-note { grid-column: 2; color: var(--wp-mut, #9aa); font-size: 9px; line-height: 14px; }
 .wp-module-body { flex: none; max-height: min(360px, calc(100vh - 270px)); overflow-y: auto; border-top: 1px solid var(--wp-border,#333); padding: 8px 10px 10px; }
-.wp-module-filter { flex: 1 1 auto; min-height: 0; max-height: none; display: flex; overflow: hidden; }
-.wp-filter-controls-compact { display: flex; flex: 1; min-height: 0; overflow-y: auto; flex-direction: column; }
-.wp-filter-controls-compact > .wp-filter-block:last-child { display: flex; flex: 1 0 auto; flex-direction: column; }
-.wp-filter-controls-compact .wp-filter-switches { margin-top: auto; padding-bottom: 2px; }
+.wp-module-effects { flex: 1 1 auto; min-height: 0; max-height: none; }
+.wp-filter-controls-compact { min-height: 0; }
+.wp-effect-scope { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 5px; margin-bottom: 8px; }
+.wp-effect-scope-item { min-width: 0; padding: 6px 8px; border: 1px solid rgba(255,255,255,.09); border-radius: 8px; background: rgba(255,255,255,.025); }
+.wp-effect-scope-item strong { display: block; color: var(--wp-fg, #eee); font-size: 9px; line-height: 13px; }
+.wp-effect-scope-item span { display: block; color: var(--wp-mut, #9aa); font-size: 8px; line-height: 12px; }
+.wp-effect-condition { grid-column: 1 / -1; margin: 0; color: var(--wp-mut, #9aa); font-size: 9px; line-height: 14px; }
+.wp-effect-section { margin-top: 6px; border: 1px solid rgba(255,255,255,.10); border-radius: 9px; background: rgba(255,255,255,.02); overflow: hidden; }
+.wp-effect-section > summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 9px; color: var(--wp-fg, #eee); cursor: pointer; font-size: 10px; font-weight: 700; list-style: none; user-select: none; }
+.wp-effect-section > summary::-webkit-details-marker { display: none; }
+.wp-effect-section > summary::after { content: '⌄'; color: var(--wp-mut, #9aa); font-size: 13px; transition: transform .15s ease; }
+.wp-effect-section:not([open]) > summary::after { transform: rotate(-90deg); }
+.wp-effect-section > summary small { margin-left: auto; color: var(--wp-mut, #9aa); font-size: 8px; font-weight: 400; }
+.wp-effect-section-body { padding: 2px 0 8px; border-top: 1px solid rgba(255,255,255,.07); }
 .wp-filter-status { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 7px 8px; border: 1px solid color-mix(in srgb, var(--wp-accent, #4c9aff) 34%, transparent); border-radius: 9px; background: color-mix(in srgb, var(--wp-accent, #4c9aff) 9%, transparent); }
 .wp-filter-status strong { flex: 1; min-width: 0; font-size: 10px; color: var(--wp-fg, #eee); }
 .wp-filter-status small { color: var(--wp-mut, #9aa); font-size: 9px; white-space: nowrap; }
+.wp-filter-unavailable { box-sizing: border-box; width: 100%; align-self: flex-start; padding: 10px 11px; border: 1px solid rgba(255,183,77,.28); border-radius: 9px; background: rgba(255,183,77,.08); color: var(--wp-mut, #bbb); line-height: 16px; }
+.wp-filter-unavailable strong { display: block; margin-bottom: 2px; color: var(--wp-fg, #eee); font-size: 10px; }
+.wp-filter-unavailable span { font-size: 9px; }
+.wp-filter-scope-note { margin: 7px 10px 4px; color: var(--wp-mut, #9aa); font-size: 9px; line-height: 14px; }
 .wp-filter-presets { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 5px; }
 .wp-filter-preset { min-width: 0; min-height: 42px; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 5px 6px; border: 1px solid rgba(255,255,255,.13); border-radius: 8px; background: rgba(255,255,255,.045); color: var(--wp-mut, #bbb); cursor: pointer; text-align: left; }
 .wp-filter-preset:hover, .wp-filter-preset-on { color: var(--wp-fg, #fff); border-color: var(--wp-accent, #4c9aff); background: color-mix(in srgb, var(--wp-accent, #4c9aff) 18%, transparent); }
@@ -144,6 +158,12 @@ html[data-wp-ui-tint-all] body {
 .wp-filter-color span { width: 44px; flex: none; color: var(--wp-mut, #ccc); font-size: 11px; }
 .wp-filter-color input[type=color] { width: 34px; height: 24px; padding: 0; border: 1px solid rgba(255,255,255,.22); border-radius: 7px; background: transparent; cursor: pointer; }
 .wp-filter-color small { flex: 1; color: var(--wp-mut, #9aa); font-size: 9px; line-height: 13px; }
+.wp-light-source { margin: 5px 8px 0; border: 1px solid rgba(255,255,255,.09); border-radius: 8px; background: rgba(255,255,255,.025); overflow: hidden; }
+.wp-light-source-head, .wp-light-source > summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 8px; color: var(--wp-fg, #eee); font-size: 10px; font-weight: 600; }
+.wp-light-source > summary { cursor: pointer; user-select: none; }
+.wp-light-source-head small, .wp-light-source > summary small { color: var(--wp-mut, #9aa); font-size: 8px; font-weight: 400; }
+.wp-light-source > summary::marker { color: var(--wp-accent, #4c9aff); }
+.wp-light-controls { padding-bottom: 5px; }
 .wp-filter-switches { display: flex; flex-wrap: wrap; gap: 5px; padding: 3px 10px; }
 .wp-filter-switches .wp-btn { flex: 1 1 70px; }
 .wp-sect-title { font-size: 10px; color: var(--wp-mut, #9aa); user-select: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -181,7 +201,7 @@ html[data-wp-ui-tint-all] body {
 .wp-rz-sw { bottom: -3px; left: -3px; width: 13px; height: 13px; cursor: nesw-resize; }
 /* 背景注入提示条（overlay 层，背景本体在 body 底层） */
 .wp-bg-tip { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 8900; font-size: 10px; color: var(--dsw-alias-label-secondary, #ccc); background: rgba(0,0,0,.55); padding: 3px 12px; border-radius: 999px; pointer-events: none; white-space: nowrap; max-width: 80vw; overflow: hidden; text-overflow: ellipsis; }
-/* 背景效果行（面板画面调整区：镜像/反转/色调/动画速度） */
+/* 合并效果模块的分组行 */
 .wp-fx-row { display: flex; align-items: center; gap: 5px; padding: 3px 10px 1px; flex: none; flex-wrap: wrap; }
 .wp-fx-label { width: 44px; flex: none; font-size: 11px; color: var(--wp-mut, #ccc); }
 .wp-fx-material-grid { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
@@ -267,8 +287,8 @@ html[data-wp-ui-tint-all] body {
 .wp-coll-select:hover { border-color: #fff; background: rgba(20,31,49,.88); }
 .wp-coll-select.wp-coll-select-on { color: #fff; border-color: transparent; background: var(--wp-accent, #4c9aff); }
 .wp-coll-empty { color: var(--dsw-alias-label-secondary, #888); padding: 16px 10px; text-align: center; font-size: 11px; grid-column: 1 / -1; }
-@media (max-width: 480px) { .wp-filter-presets { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (prefers-reduced-motion: reduce) { .wp-thumb, .wp-hover-preview, .wp-set-disclosure > summary::after, .wp-fx-preview, .wp-set-coll-card img { transition: none; } .wp-library-drawer { animation: none; } }
+@media (max-width: 480px) { .wp-filter-presets { grid-template-columns: repeat(2, minmax(0,1fr)); } .wp-effect-scope { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .wp-thumb, .wp-hover-preview, .wp-set-disclosure > summary::after, .wp-effect-section > summary::after, .wp-fx-preview, .wp-set-coll-card img { transition: none; } .wp-library-drawer { animation: none; } }
 `)
 
     // 侧栏按钮 ↔ 面板 共享开关状态
@@ -298,7 +318,7 @@ html[data-wp-ui-tint-all] body {
     if (bootStore.autostart && bootStore.enabled) setOpen(true)
     const h = React.createElement
     const call = (args) => host.call('we-call', args)
-    const PLUGIN_VERSION = '0.3.0'
+    const PLUGIN_VERSION = '0.3.1'
     const MUSIC_SCOPE_NOTE = '统一控制 DSH 当前可用音轨：视频、网页和实时场景；图片、应用预览及转码缓存本身无音轨，开声时场景会自动切回实时渲染。视频/网页仅在 DSH 内控制；实时场景按 Wallpaper Engine 窗口所属音频进程控制，若引擎复用同一进程可能联动桌面声音。'
     // 悬停预览独立于 .wp-root 渲染；面板滤镜会形成包含块，不能把 fixed 预览放在其内部。
     const hoverStore = { value: null, subs: new Set() }
@@ -342,6 +362,8 @@ html[data-wp-ui-tint-all] body {
     // opacity: 表面不透明度（0~100%，默认 15，界面全透明、背景完全呈现）——控制「界面内容 vs 背景」的平衡
     // contrast/saturate: 背景画面 对比度/饱和度（%，100=原始）
     const bgStore = { on: false, item: null, region: 'full', scale: 1, fit: null, videoUrl: null, webUrl: null, capId: null, staticUrl: null, opacity: 0.15, contrast: 100, saturate: 100, brightness: 100, blur: 0, subs: new Set() }
+    const isFilterSupported = (item) => !!(item && (item.type === 'image' || item.type === 'video'))
+    const isFilterAvailable = (state) => !!(state && state.on && isFilterSupported(state.item))
     // 注意：必须传新对象（浅拷贝）给订阅者——React 用 Object.is 比较，传同一引用不会触发重渲染
     const setBg = (on, item) => {
       bgStore.on = on
@@ -408,7 +430,13 @@ html[data-wp-ui-tint-all] body {
     //   uiTint/uiTintAll/uiTintStrength 界面染色开关、范围和独立强度（不参与壁纸效果链）
     //   hue/temperature/sepia/grayscale 色彩滤镜；light* 光源；vignette/grain 氛围层
     //   material 记录当前界面材质预设（独立于壁纸滤镜）
-    const FILTER_FX_DEFAULTS = { on: true, strength: 0, mirror: false, invert: false, rgbR: 100, rgbG: 100, rgbB: 100, hue: 0, temperature: 0, sepia: 0, grayscale: 0, light: 0, lightColor: '#ffd6a3', lightX: 32, lightY: 22, lightSize: 68, vignette: 0, grain: 0 }
+    const FILTER_FX_DEFAULTS = {
+      on: true, strength: 0, mirror: false, invert: false, rgbR: 100, rgbG: 100, rgbB: 100, hue: 0, temperature: 0, sepia: 0, grayscale: 0,
+      light: 0, lightColor: '#ffd6a3', lightX: 32, lightY: 22, lightSize: 68,
+      light2: 0, light2Color: '#8fc8ff', light2X: 72, light2Y: 30, light2Size: 64,
+      light3: 0, light3Color: '#f2a7ff', light3X: 50, light3Y: 82, light3Size: 54,
+      vignette: 0, grain: 0,
+    }
     const FILTER_BG_DEFAULTS = { brightness: 100, contrast: 100, saturate: 100, blur: 0 }
     const fxDefaults = Object.assign({ color: '#4c9aff', opacity: 15, speed: 50, glass: 50, uiGlass: 0, uiTint: false, uiTintAll: false, uiTintStrength: 30, material: 'clear' }, FILTER_FX_DEFAULTS)
     const fxStore = Object.assign({ subs: new Set() }, fxDefaults)
@@ -419,16 +447,16 @@ html[data-wp-ui-tint-all] body {
       { id: 'frosted', name: '磨砂', hint: '标准磨砂', uiGlass: 72 },
       { id: 'noir', name: '暗幕', hint: '深色玻璃', uiGlass: 50 },
     ]
-    // 全类型视觉方案：只改壁纸滤镜，不碰音乐、轮播、启动设置和界面材质。
+    // 图片/视频视觉方案：只改壁纸滤镜，不碰音乐、轮播、启动设置和界面材质。
     const FILTER_PRESETS = [
       { id: 'original', name: '原片', hint: '中性还原', fx: Object.assign({}, FILTER_FX_DEFAULTS), bg: Object.assign({}, FILTER_BG_DEFAULTS) },
-      { id: 'cinema', name: '影院', hint: '沉稳胶片', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: 12, sepia: 5, vignette: 36, grain: 12, light: 10 }), bg: { brightness: 94, contrast: 118, saturate: 88, blur: 0 } },
-      { id: 'neon-night', name: '霓虹夜', hint: '冷光高彩', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: -28, hue: -8, light: 38, lightColor: '#6d7cff', lightX: 72, lightY: 24, vignette: 44, grain: 8 }), bg: { brightness: 94, contrast: 128, saturate: 148, blur: 0 } },
-      { id: 'golden-hour', name: '暖阳', hint: '柔暖侧光', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: 48, sepia: 10, light: 46, lightColor: '#ffd08a', lightX: 24, lightY: 18, lightSize: 78, vignette: 12 }), bg: { brightness: 108, contrast: 103, saturate: 112, blur: 0 } },
-      { id: 'cool-mist', name: '冷雾', hint: '低饱和蓝调', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: -46, grayscale: 8, light: 28, lightColor: '#b8dcff', lightX: 48, lightY: 16, lightSize: 92, vignette: 18 }), bg: { brightness: 102, contrast: 92, saturate: 78, blur: 1 } },
+      { id: 'cinema', name: '影院', hint: '沉稳胶片', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: 12, sepia: 5, vignette: 36, grain: 12, light: 10, light3: 8, light3Color: '#ffb36b' }), bg: { brightness: 94, contrast: 118, saturate: 88, blur: 0 } },
+      { id: 'neon-night', name: '霓虹夜', hint: '冷光高彩', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: -28, hue: -8, light: 38, lightColor: '#6d7cff', lightX: 72, lightY: 24, light2: 28, light2Color: '#ff4fc8', light2X: 22, light2Y: 52, light3: 16, light3Color: '#3cf3ff', vignette: 44, grain: 8 }), bg: { brightness: 94, contrast: 128, saturate: 148, blur: 0 } },
+      { id: 'golden-hour', name: '暖阳', hint: '柔暖侧光', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: 48, sepia: 10, light: 46, lightColor: '#ffd08a', lightX: 24, lightY: 18, lightSize: 78, light2: 14, light2Color: '#a7cbff', light2X: 82, light2Y: 48, vignette: 12 }), bg: { brightness: 108, contrast: 103, saturate: 112, blur: 0 } },
+      { id: 'cool-mist', name: '冷雾', hint: '低饱和蓝调', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: -46, grayscale: 8, light: 28, lightColor: '#b8dcff', lightX: 48, lightY: 16, lightSize: 92, light2: 12, light2Color: '#d9b8ff', light2X: 18, light2Y: 68, vignette: 18 }), bg: { brightness: 102, contrast: 92, saturate: 78, blur: 1 } },
       { id: 'vintage', name: '旧时光', hint: '褪色颗粒', fx: Object.assign({}, FILTER_FX_DEFAULTS, { temperature: 36, sepia: 32, vignette: 30, grain: 28, light: 14, lightColor: '#f3c58b' }), bg: { brightness: 98, contrast: 108, saturate: 72, blur: 0 } },
       { id: 'silver', name: '银盐', hint: '黑白硬调', fx: Object.assign({}, FILTER_FX_DEFAULTS, { grayscale: 100, vignette: 46, grain: 32 }), bg: { brightness: 100, contrast: 126, saturate: 0, blur: 0 } },
-      { id: 'dream', name: '梦境', hint: '柔焦漫光', fx: Object.assign({}, FILTER_FX_DEFAULTS, { hue: 14, light: 40, lightColor: '#e6b8ff', lightX: 62, lightY: 24, lightSize: 90, vignette: 10, grain: 5 }), bg: { brightness: 110, contrast: 90, saturate: 136, blur: 2 } },
+      { id: 'dream', name: '梦境', hint: '柔焦漫光', fx: Object.assign({}, FILTER_FX_DEFAULTS, { hue: 14, light: 40, lightColor: '#e6b8ff', lightX: 62, lightY: 24, lightSize: 90, light2: 24, light2Color: '#89e8ff', light2X: 18, light2Y: 62, light3: 18, light3Color: '#ffd0e5', vignette: 10, grain: 5 }), bg: { brightness: 110, contrast: 90, saturate: 136, blur: 2 } },
     ]
     try {
       for (const k of Object.keys(fxDefaults)) {
@@ -505,16 +533,26 @@ html[data-wp-ui-tint-all] body {
     }
     const atmosphereStyles = (state) => {
       const enabled = !!(state && state.on)
-      const light = enabled ? clamp(state.light, 0, 100) : 0
+      const lights = enabled ? [
+        ['light', 'lightColor', 'lightX', 'lightY', 'lightSize'],
+        ['light2', 'light2Color', 'light2X', 'light2Y', 'light2Size'],
+        ['light3', 'light3Color', 'light3X', 'light3Y', 'light3Size'],
+      ].map(([strengthKey, colorKey, xKey, yKey, sizeKey]) => ({
+        strength: clamp(state[strengthKey], 0, 100),
+        rgb: hexRgb(state[colorKey]),
+        x: clamp(state[xKey], 0, 100),
+        y: clamp(state[yKey], 0, 100),
+        size: clamp(state[sizeKey], 20, 120),
+      })).filter((light) => light.strength > 0) : []
       const vignette = enabled ? clamp(state.vignette, 0, 100) : 0
       const grain = enabled ? clamp(state.grain, 0, 100) : 0
-      const rgb = hexRgb(state && state.lightColor)
-      const lightAlpha = (light * .006).toFixed(3)
-      const size = clamp(state && state.lightSize, 20, 120)
       const noiseAlpha = (grain * .0018).toFixed(3)
       return {
-        active: !!(light || vignette || grain),
-        light: { background: 'radial-gradient(circle at ' + clamp(state && state.lightX, 0, 100) + '% ' + clamp(state && state.lightY, 0, 100) + '%, rgba(' + rgb.join(',') + ',' + lightAlpha + ') 0%, rgba(' + rgb.join(',') + ',' + (light * .0015).toFixed(3) + ') ' + Math.round(size * .45) + '%, transparent ' + size + '%)', mixBlendMode: 'screen', opacity: light ? 1 : 0 },
+        active: !!(lights.length || vignette || grain),
+        light: {
+          background: lights.map((light) => 'radial-gradient(circle at ' + light.x + '% ' + light.y + '%, rgba(' + light.rgb.join(',') + ',' + (light.strength * .006).toFixed(3) + ') 0%, rgba(' + light.rgb.join(',') + ',' + (light.strength * .0015).toFixed(3) + ') ' + Math.round(light.size * .45) + '%, transparent ' + light.size + '%)').join(','),
+          backgroundBlendMode: 'screen', mixBlendMode: 'screen', opacity: lights.length ? 1 : 0,
+        },
         vignette: { background: 'radial-gradient(ellipse at 50% 48%, transparent ' + Math.round(64 - vignette * .22) + '%, rgba(0,0,0,' + (vignette * .0075).toFixed(3) + ') 100%)', opacity: vignette ? 1 : 0 },
         grain: { backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'128\' height=\'128\'><filter id=\'n\'><feTurbulence type=\'fractalNoise\' baseFrequency=\'.78\' numOctaves=\'4\' stitchTiles=\'stitch\'/><feColorMatrix type=\'saturate\' values=\'0\'/></filter><rect width=\'128\' height=\'128\' filter=\'url(%23n)\' opacity=\'' + noiseAlpha + '\'/></svg>")', backgroundSize: '128px 128px', mixBlendMode: 'soft-light', opacity: grain ? 1 : 0 },
       }
@@ -522,7 +560,7 @@ html[data-wp-ui-tint-all] body {
     // 应用效果到当前背景元素（filter 链 + transform + 视频速率 + 色调层）；无背景时只准备 SVG 滤镜
     const applyFxNow = () => {
       try {
-        const on = fxStore.on
+        const on = !!(fxStore.on && isFilterAvailable(bgStore))
         // 滤镜链：基础画面 + 色温/通道矩阵 + 可调色彩滤镜。
         const parts = []
         if (on) {
@@ -601,8 +639,8 @@ html[data-wp-ui-tint-all] body {
           try { fxTintEl.parentNode.removeChild(fxTintEl) } catch (e) { /* ignore */ }
           fxTintEl = null
         }
-        // 光源、暗角和颗粒作为独立透明层，可覆盖 DOM 背景及原生实时场景。
-        const atmosphere = atmosphereStyles(fxStore)
+        // 光源、暗角和颗粒仅覆盖图片/视频；切换到其他类型时移除透明层。
+        const atmosphere = atmosphereStyles(on ? fxStore : null)
         if (atmosphere.active && bgStore.on) {
           if (!fxAtmosphereEl) {
             fxAtmosphereEl = document.createElement('div')
@@ -693,51 +731,78 @@ html, #root, #root > * { background-color: transparent !important; }
     }
     const filterFxSnapshot = (source) => Object.keys(FILTER_FX_DEFAULTS).reduce((result, key) => { result[key] = source[key]; return result }, {})
     const filterPresetActive = (preset, fx, bg) => Object.keys(preset.fx).every((key) => fx[key] === preset.fx[key]) && Object.keys(preset.bg).every((key) => bg[key] === preset.bg[key])
-    const applyFilterPreset = (preset) => { setFx(Object.assign({}, preset.fx)); setBgParams(Object.assign({}, preset.bg)) }
+    const applyFilterPreset = (preset) => { if (isFilterAvailable(bgStore)) { setFx(Object.assign({}, preset.fx)); setBgParams(Object.assign({}, preset.bg)) } }
     const resetFilters = () => applyFilterPreset(FILTER_PRESETS[0])
-    const FilterControls = ({ fx, bg, compact }) => {
-      const slider = (key, label, value, min, max, set, suffix) => h('div', { className: compact ? 'wp-slider-row' : 'wp-set-row' },
+    const BasePictureControls = ({ bg, compact }) => {
+      const rows = [
+        ['opacity', '透明度', 0, 100, Math.round((bg && bg.opacity != null ? bg.opacity : .15) * 100), (value) => setBgParams({ opacity: value / 100 }), '%'],
+        ['brightness', '亮度', 40, 200, bg && bg.brightness != null ? bg.brightness : 100, (value) => setBgParams({ brightness: value }), '%'],
+        ['contrast', '对比度', 40, 200, bg && bg.contrast != null ? bg.contrast : 100, (value) => setBgParams({ contrast: value }), '%'],
+        ['saturate', '饱和度', 0, 200, bg && bg.saturate != null ? bg.saturate : 100, (value) => setBgParams({ saturate: value }), '%'],
+        ['blur', '模糊', 0, 20, bg && bg.blur != null ? bg.blur : 0, (value) => setBgParams({ blur: value }), 'px'],
+      ]
+      return h('div', { className: 'wp-base-controls' }, rows.map(([key, label, min, max, value, set, suffix]) =>
+        h('div', { key, className: compact ? 'wp-slider-row' : 'wp-set-row' },
+          h('span', {}, label),
+          h('input', { className: compact ? '' : 'wp-set-range', type: 'range', min, max, value, 'data-picture-key': key, 'aria-label': label, onChange: (e) => set(Number(e.target.value)) }),
+          h('b', { className: compact ? '' : 'wp-set-num' }, String(value) + suffix))))
+    }
+    const FilterControls = ({ fx, bg, compact, disabled, disabledReason }) => {
+      if (disabled) return h('div', { className: 'wp-filter-unavailable', role: 'status' },
+        h('strong', {}, '当前背景不可使用滤镜'),
+        h('span', {}, disabledReason))
+      const slider = (key, label, value, min, max, set, suffix, disabled) => h('div', { className: compact ? 'wp-slider-row' : 'wp-set-row' },
         h('span', {}, label),
-        h('input', { className: compact ? '' : 'wp-set-range', type: 'range', min, max, value, 'data-fx-key': key, 'aria-label': label, onChange: (e) => set(Number(e.target.value)) }),
+        h('input', { className: compact ? '' : 'wp-set-range', type: 'range', min, max, value, disabled: !!disabled, 'data-fx-key': key, 'aria-label': label, onChange: (e) => set(Number(e.target.value)) }),
         h('b', { className: compact ? '' : 'wp-set-num' }, String(value) + (suffix || '')))
-      const fxSlider = (key, label, min, max, suffix) => slider(key, label, fx[key], min, max, (value) => setFx({ [key]: value }), suffix)
-      const bgSlider = (key, label, min, max, suffix) => slider(key, label, bg[key], min, max, (value) => setBgParams({ [key]: value }), suffix)
+      const fxSlider = (key, label, min, max, suffix, disabled) => slider(key, label, fx[key], min, max, (value) => setFx({ [key]: value }), suffix, disabled)
+      const lightControls = (suffix, hint) => {
+        const base = 'light' + suffix
+        const colorKey = base + 'Color'
+        return h('div', { className: 'wp-light-controls' },
+          h('div', { className: 'wp-filter-color' },
+            h('span', {}, '光色'),
+            h('input', { type: 'color', value: fx[colorKey], 'data-fx-key': colorKey, 'aria-label': hint + '颜色', onChange: (e) => setFx({ [colorKey]: e.target.value }) }),
+            h('small', {}, hint)),
+          fxSlider(base, '强度', 0, 100, '%'),
+          fxSlider(base + 'X', '横向', 0, 100, '%'),
+          fxSlider(base + 'Y', '纵向', 0, 100, '%'),
+          fxSlider(base + 'Size', '范围', 20, 120, '%'))
+      }
+      const mirrorOn = !!(fx.on && fx.mirror)
+      const invertOn = !!(fx.on && fx.invert)
+      const videoReady = !!(bg && bg.on && bg.item && bg.item.type === 'video')
       return h('div', { className: 'wp-filter-controls' + (compact ? ' wp-filter-controls-compact' : '') },
         h('div', { className: 'wp-filter-status' },
-          h('strong', {}, '全类型视觉链'),
-          h('small', {}, '图片 · 视频 · 网页 · 场景 · 应用'),
+          h('strong', {}, '图片 / 视频视觉链'),
+          h('small', {}, '仅图片 · 视频'),
           h('button', { type: 'button', className: 'wp-btn', onClick: resetFilters, title: '只重置壁纸滤镜，不改变界面材质、声音和轮播', style: { fontSize: 9 } }, '重置滤镜')),
+        h('div', { className: 'wp-filter-scope-note' }, '预设会联动基础画面参数；亮度、对比度、饱和度和模糊只在“基础画面”保留一套控件。'),
         h('div', { className: 'wp-filter-presets', role: 'group', 'aria-label': '滤镜方案' }, FILTER_PRESETS.map((preset) =>
           h('button', { key: preset.id, type: 'button', className: 'wp-filter-preset' + (filterPresetActive(preset, fx, bg) ? ' wp-filter-preset-on' : ''), 'data-fx-preset': preset.id, 'aria-pressed': filterPresetActive(preset, fx, bg), onClick: () => applyFilterPreset(preset) },
             h('b', {}, preset.name), h('small', {}, preset.hint)))),
         h('div', { className: 'wp-filter-block' },
-          h('div', { className: 'wp-filter-block-title' }, h('span', {}, '☀ 光照'), h('small', {}, '独立光源位置与范围')),
-          h('div', { className: 'wp-filter-color' },
-            h('span', {}, '光色'),
-            h('input', { type: 'color', value: fx.lightColor, 'data-fx-key': 'lightColor', 'aria-label': '光源颜色', onChange: (e) => setFx({ lightColor: e.target.value }) }),
-            h('small', {}, '叠加式环境光，原生实时场景同样生效')),
-          fxSlider('light', '强度', 0, 100, '%'),
-          fxSlider('lightX', '横向', 0, 100, '%'),
-          fxSlider('lightY', '纵向', 0, 100, '%'),
-          fxSlider('lightSize', '范围', 20, 120, '%')),
+          h('div', { className: 'wp-filter-block-title' }, h('span', {}, '☀ 多光源'), h('small', {}, '主光·辅光·轮廓光独立调整')),
+          h('div', { className: 'wp-light-source' },
+            h('div', { className: 'wp-light-source-head' }, h('span', {}, '主光'), h('small', {}, fx.light + '%')),
+            lightControls('', '主光源位置与范围')),
+          h('details', { className: 'wp-light-source' },
+            h('summary', {}, h('span', {}, '辅光'), h('small', {}, fx.light2 + '% · 展开调整')),
+            lightControls('2', '辅光补足暗部层次')),
+          h('details', { className: 'wp-light-source' },
+            h('summary', {}, h('span', {}, '轮廓光'), h('small', {}, fx.light3 + '% · 展开调整')),
+            lightControls('3', '轮廓光强化边缘氛围'))),
         h('div', { className: 'wp-filter-block' },
-          h('div', { className: 'wp-filter-block-title' }, h('span', {}, '◐ 色彩'), h('small', {}, '逐项微调，全部背景通用')),
-          bgSlider('brightness', '曝光', 40, 180, '%'),
-          bgSlider('contrast', '对比', 40, 180, '%'),
-          bgSlider('saturate', '饱和', 0, 200, '%'),
+          h('div', { className: 'wp-filter-block-title' }, h('span', {}, '◐ 滤镜色彩'), h('small', {}, '仅图片和视频')),
           fxSlider('temperature', '色温', -100, 100, ''),
           fxSlider('hue', '色相', -180, 180, '°'),
           fxSlider('sepia', '棕褐', 0, 100, '%'),
-          fxSlider('grayscale', '黑白', 0, 100, '%'),
-          bgSlider('blur', '柔焦', 0, 20, 'px')),
+          fxSlider('grayscale', '黑白', 0, 100, '%')),
         h('div', { className: 'wp-filter-block' },
           h('div', { className: 'wp-filter-block-title' }, h('span', {}, '✦ 氛围'), h('small', {}, '边缘与质感')),
           fxSlider('vignette', '暗角', 0, 100, '%'),
           fxSlider('grain', '颗粒', 0, 100, '%'),
-          h('div', { className: 'wp-filter-color' },
-            h('span', {}, '色罩'),
-            h('input', { type: 'color', value: fx.color, 'data-fx-key': 'color', 'aria-label': '壁纸色罩颜色', onChange: (e) => setFx({ color: e.target.value }) }),
-            h('small', {}, '与主色共用色板')),
+          h('div', { className: 'wp-filter-scope-note' }, '色罩使用“界面材质 / 主色与界面”中的共享主色。'),
           fxSlider('strength', '色罩', 0, 100, '%')),
         h('div', { className: 'wp-filter-block' },
           h('div', { className: 'wp-filter-block-title' }, h('span', {}, 'RGB 通道'), h('small', {}, '100% 为原色')),
@@ -746,8 +811,12 @@ html, #root, #root > * { background-color: transparent !important; }
           fxSlider('rgbB', '蓝色', 0, 200, '%'),
           h('div', { className: 'wp-filter-switches' },
             h('button', { type: 'button', className: 'wp-btn' + (fx.on ? ' wp-btn-on' : ''), 'aria-pressed': fx.on, onClick: () => setFx({ on: !fx.on }) }, fx.on ? '滤镜开' : '滤镜关'),
-            h('button', { type: 'button', className: 'wp-btn' + (fx.mirror ? ' wp-btn-on' : ''), 'aria-pressed': fx.mirror, onClick: () => setFx({ mirror: !fx.mirror }) }, '水平镜像'),
-            h('button', { type: 'button', className: 'wp-btn' + (fx.invert ? ' wp-btn-on' : ''), 'aria-pressed': fx.invert, onClick: () => setFx({ invert: !fx.invert }) }, '反色')))
+            h('button', { type: 'button', className: 'wp-btn' + (mirrorOn ? ' wp-btn-on' : ''), 'aria-pressed': mirrorOn, onClick: () => setFx({ on: true, mirror: !mirrorOn }) }, '水平镜像'),
+            h('button', { type: 'button', className: 'wp-btn' + (invertOn ? ' wp-btn-on' : ''), 'aria-pressed': invertOn, onClick: () => setFx({ on: true, invert: !invertOn }) }, '反色'))),
+        h('div', { className: 'wp-filter-block' },
+          h('div', { className: 'wp-filter-block-title' }, h('span', {}, '▶ 动态'), h('small', {}, '仅视频背景')),
+          fxSlider('speed', '播放速度', 0, 100, ' → ' + (0.5 + fx.speed / 100).toFixed(1) + 'x', !videoReady),
+          h('div', { className: 'wp-filter-scope-note' }, videoReady ? '当前视频可实时调整播放速度。' : '图片没有播放速度；场景转码缓存仍按场景类型处理。'))
       )
     }
     // 静态背景（图片类型/场景预览回退）：body 底部负 z-index <img>（与视频/捕获统一，filter 可作用）
@@ -900,7 +969,7 @@ html, #root, #root > * { background-color: transparent !important; }
           probe.src = url
         }
         tick()
-        capTimer = timer.interval(tick, nativeSceneAttached ? 250 : 1000)
+        capTimer = timer.interval(tick, windowName ? 250 : 1000)
       } catch (e) { /* dom insert failed */ }
     }
     const stopCapBg = () => {
@@ -918,15 +987,34 @@ html, #root, #root > * { background-color: transparent !important; }
       capFail = 0
     }
     const sceneNeedsRasterFx = () => {
-      if (finiteOr(bgStore.brightness, 100) !== 100 || finiteOr(bgStore.contrast, 100) !== 100 || finiteOr(bgStore.saturate, 100) !== 100 || finiteOr(bgStore.blur, 0) !== 0) return true
-      return !!(fxStore.on && (fxStore.invert || fxStore.mirror || finiteOr(fxStore.hue, 0) || finiteOr(fxStore.temperature, 0) || finiteOr(fxStore.sepia, 0) || finiteOr(fxStore.grayscale, 0) || finiteOr(fxStore.rgbR, 100) !== 100 || finiteOr(fxStore.rgbG, 100) !== 100 || finiteOr(fxStore.rgbB, 100) !== 100))
+      return finiteOr(bgStore.brightness, 100) !== 100 || finiteOr(bgStore.contrast, 100) !== 100 || finiteOr(bgStore.saturate, 100) !== 100 || finiteOr(bgStore.blur, 0) !== 0
     }
-    // 原生子窗口本身不能接收 CSS 像素滤镜；需要时叠加同一窗口的捕获帧，恢复中性值后回到原生直出。
+    let sceneFxModeTimer = null
+    const cancelSceneFxMode = () => {
+      if (!sceneFxModeTimer) return
+      try { sceneFxModeTimer() } catch (e) { /* ignore */ }
+      sceneFxModeTimer = null
+    }
+    const scheduleSceneFxMode = () => {
+      cancelSceneFxMode()
+      sceneFxModeTimer = timer.timeout(() => {
+        sceneFxModeTimer = null
+        const item = bgStore.item
+        if (bgStore.on && item && item.type === 'scene') injectBg(item, bgStore.region || 'full', bgStore.scale || 1).catch(() => {})
+      }, 120)
+    }
+    // 挂载后的原生子窗口无法单独获取原画像素；仅“基础画面”非中性时切换离屏捕获，图片/视频滤镜不参与场景判断。
     const syncNativeSceneFx = () => {
-      if (!nativeSceneAttached || !nativeSceneWindow || !bgStore.on || !bgStore.item || bgStore.item.type !== 'scene') return
-      if (sceneNeedsRasterFx()) {
+      if (!nativeSceneWindow || !bgStore.on || !bgStore.item || bgStore.item.type !== 'scene') return
+      const needsCapture = sceneNeedsRasterFx()
+      if (nativeSceneAttached) {
+        if (needsCapture) scheduleSceneFxMode()
+        else if (capBgEl) stopCapBg()
+        return
+      }
+      if (needsCapture) {
         if (!capBgEl) insertCapBg(bgStore.item.id, nativeSceneWindow)
-      } else if (capBgEl) stopCapBg()
+      } else if (capBgEl) scheduleSceneFxMode()
     }
     // 转码状态轮询：每 1.5s 查一次；onProgress 实时回报进度，onDone 在转码完成时调用
     // （先转码后注入流程用 onDone 完成注入；注入中升级场景不传 onDone 走默认升级）
@@ -997,6 +1085,7 @@ html, #root, #root > * { background-color: transparent !important; }
     }
     const injectBg = async (item, region, scale) => {
       if (!item || item.missing) return
+      cancelSceneFxMode()
       const seq = ++injectSeq
       // 场景状态查询与旧场景清理并行，缩短场景切换的串行等待。
       const sceneStatus = item.type === 'scene' ? call({ action: 'transcode-status', target: item.id }).catch(() => null) : null
@@ -1084,6 +1173,16 @@ html, #root, #root > * { background-color: transparent !important; }
           return
         }
         if (nativeWindow && nativeWindow.ok && nativeWindow.window) {
+          if (sceneNeedsRasterFx()) {
+            nativeSceneWindow = nativeWindow.window
+            nativeSceneAttached = false
+            sceneCleanupNeeded = true
+            setBg(true, item)
+            enableBgCss(bgStore.opacity)
+            insertCapBg(item.id, nativeWindow.window)
+            syncDshBgMusic()
+            return
+          }
           const attached = await call({ action: 'native-attach', window: nativeWindow.window }).catch(() => null)
           if (seq !== injectSeq) {
             // 只关闭本次已失效的窗口；全局 detach 可能误拆已经开始挂载的新场景。
@@ -1194,6 +1293,7 @@ html, #root, #root > * { background-color: transparent !important; }
       insertStaticBg(url)
     }
     const clearBg = async () => {
+      cancelSceneFxMode()
       ++injectSeq
       const previousNativeWindow = nativeSceneWindow
       bgStore.videoUrl = null
@@ -1243,6 +1343,21 @@ html, #root, #root > * { background-color: transparent !important; }
       carouselTimer = timer.interval(rotateCarousel, carouselStore.interval * 60 * 1000)
     }
     const TYPE_LABEL = { scene: '场景', video: '视频', web: '网页', image: '图片', application: '应用', other: '其他' }
+    const filterSupportNote = (state) => {
+      if (isFilterAvailable(state)) return '滤镜仅作用于当前图片或视频背景；面板与设置页同步。'
+      if (!state || !state.on || !state.item) return '滤镜仅支持图片和视频；请先注入对应类型的背景。'
+      return '当前为' + (TYPE_LABEL[state.item.type] || '其他') + '背景，滤镜已禁用；参数会保留，切回图片或视频后自动恢复。'
+    }
+    const EffectScopeGuide = ({ bg }) => h('div', { className: 'wp-effect-scope', role: 'note', 'aria-label': '效果使用范围与条件' },
+      [
+        ['基础画面', '图片 · 视频 · 网页 · 场景 · 应用'],
+        ['滤镜与光照', '仅图片 · 视频'],
+        ['播放速度', '仅视频背景'],
+        ['界面材质', '独立于壁纸类型'],
+      ].map(([title, scope]) => h('div', { key: title, className: 'wp-effect-scope-item' }, h('strong', {}, title), h('span', {}, scope))),
+      h('p', { className: 'wp-effect-condition' }, isFilterAvailable(bg)
+        ? '当前类型可用全部图片/视频滤镜；视频才可调整播放速度。'
+        : filterSupportNote(bg) + ' 场景使用基础画面参数时会切换捕获渲染，滤镜不会触发场景重注入。'))
     // 面板收起会卸载组件；会话缓存避免每次拉绳展开都重新扫描订阅目录。
     const panelSession = { items: null, cfg: null, folderTags: null, scanned: false }
 
@@ -1257,7 +1372,7 @@ html, #root, #root > * { background-color: transparent !important; }
       const [transStatus, setTransStatus] = React.useState(null)
       const [cfg, setCfg] = React.useState(panelSession.cfg)
       const [showLibrary, setShowLibrary] = React.useState(false)
-      const [activeTool, setActiveTool] = React.useState('') // '' | 'adjust' | 'filter' | 'settings'
+      const [activeTool, setActiveTool] = React.useState('') // '' | 'effects' | 'settings'
       const [showHelp, setShowHelp] = React.useState(false)
       const [cacheDirInput, setCacheDirInput] = React.useState('') // 缓存目录输入框
       const [folderTags, setFolderTags] = React.useState(panelSession.folderTags) // 已订阅文件夹标签（启动时刷新）
@@ -1273,6 +1388,8 @@ html, #root, #root > * { background-color: transparent !important; }
       const [pos, setPos] = React.useState(null)
       const [viewport, setViewport] = React.useState(() => ({ w: typeof window !== 'undefined' ? window.innerWidth : 1920, h: typeof window !== 'undefined' ? window.innerHeight : 1080 }))
       const fx = useFx() // 背景效果状态（与设置页双向同步，面板侧也可实时调整）
+      const filterReady = isFilterAvailable(bg)
+      const filterNote = filterSupportNote(bg)
       const setCustomFx = (patch) => setFx(patch)
       const reqSeqRef = React.useRef(0)
       const resizeRef = React.useRef(null)
@@ -1430,31 +1547,24 @@ html, #root, #root > * { background-color: transparent !important; }
         if (query && (it.title || '').toLowerCase().indexOf(query.toLowerCase()) < 0 && it.id.indexOf(query) < 0) return false
         return true
       })
-      const defaultPanelW = viewport.w <= 480 ? Math.max(280, viewport.w - 16) : 400
-      const panelW = Math.min(winSize ? winSize.w : defaultPanelW, Math.max(280, viewport.w - 16))
-      const panelX = pos ? pos.x : Math.max(8, viewport.w - panelW - (viewport.w <= 480 ? 8 : 14))
-      const panelY = pos ? pos.y : 80
-      const compactLibrary = viewport.w - panelW < 330
-      const drawerW = compactLibrary ? panelW : Math.min(520, Math.max(300, viewport.w - panelW - 34))
+      const freePanelLayout = viewport.w > 480
+      const defaultPanelW = freePanelLayout ? 400 : Math.max(280, viewport.w - 16)
+      const panelW = Math.min(freePanelLayout && winSize ? winSize.w : defaultPanelW, Math.max(280, viewport.w - 16))
+      const panelX = freePanelLayout && pos ? pos.x : Math.max(8, viewport.w - panelW - (freePanelLayout ? 14 : 8))
+      const panelY = freePanelLayout && pos ? pos.y : 80
+      const compactLibrary = viewport.w <= 720
+      const drawerW = compactLibrary ? Math.min(520, Math.max(280, viewport.w - 16)) : Math.min(520, Math.max(300, Math.round(viewport.w * .36)))
       let drawerX = compactLibrary ? panelX : panelX - drawerW - 10
       if (!compactLibrary && drawerX < 8 && panelX + panelW + drawerW + 18 <= viewport.w) drawerX = panelX + panelW + 10
       drawerX = Math.min(Math.max(8, drawerX), Math.max(8, viewport.w - drawerW - 8))
+      const drawerTop = Math.round(Math.min(Math.max(8, panelY), Math.max(8, viewport.h - 300)))
       const drawerStyle = {
         '--wp-a': String((0.35 + 0.4 * panelOpacity / 100).toFixed(3)),
         left: Math.round(drawerX),
-        top: Math.round(Math.min(Math.max(8, panelY), Math.max(8, viewport.h - 300))),
+        top: drawerTop,
         width: Math.round(drawerW),
-        height: Math.round(Math.max(300, Math.min(winSize ? winSize.h : viewport.h - panelY - 20, viewport.h - 16))),
+        height: Math.round(Math.max(300, viewport.h - drawerTop - 8)),
       }
-
-      // 背景参数滑块定义（透明度/对比度/饱和度/亮度/模糊）
-      const adjRows = [
-        { k: 'opacity', label: '透明度', min: 0, max: 100, val: () => Math.round((bg && bg.opacity != null ? bg.opacity : 0.15) * 100), set: (v) => setBgParams({ opacity: v / 100 }), suf: '%' },
-        { k: 'contrast', label: '对比度', min: 50, max: 200, val: () => (bg && bg.contrast != null ? bg.contrast : 100), set: (v) => setBgParams({ contrast: v }), suf: '%' },
-        { k: 'saturate', label: '饱和度', min: 0, max: 200, val: () => (bg && bg.saturate != null ? bg.saturate : 100), set: (v) => setBgParams({ saturate: v }), suf: '%' },
-        { k: 'brightness', label: '亮度', min: 50, max: 200, val: () => (bg && bg.brightness != null ? bg.brightness : 100), set: (v) => setBgParams({ brightness: v }), suf: '%' },
-        { k: 'blur', label: '模糊', min: 0, max: 20, val: () => (bg && bg.blur != null ? bg.blur : 0), set: (v) => setBgParams({ blur: v }), suf: 'px' },
-      ]
 
       return h(React.Fragment, null,
         h('div', {
@@ -1464,8 +1574,8 @@ html, #root, #root > * { background-color: transparent !important; }
         'aria-labelledby': 'wp-wallpaper-title',
         style: Object.assign(
           { '--wp-a': String((0.35 + 0.4 * panelOpacity / 100).toFixed(3)) },
-          winSize ? { width: winSize.w, height: winSize.h } : null,
-          pos ? { left: pos.x, top: pos.y, right: 'auto' } : null),
+          freePanelLayout && winSize ? { width: winSize.w, height: winSize.h } : null,
+          freePanelLayout && pos ? { left: pos.x, top: pos.y, right: 'auto' } : null),
       },
         h('div', { className: 'wp-head', onPointerDown: onHeadDown, onPointerMove: onHeadMove, onPointerUp: onHeadUp, onPointerCancel: onHeadUp, title: '拖动移动面板' },
           h('span', { id: 'wp-wallpaper-title', className: 'wp-title' }, '🎨 壁纸'),
@@ -1493,11 +1603,10 @@ html, #root, #root > * { background-color: transparent !important; }
           h('div', { className: 'wp-control-group', role: 'group', 'aria-label': '壁纸工具' },
             h('span', { className: 'wp-control-label' }, '工具'),
             h('div', { className: 'wp-control-buttons' },
-              h('button', { type: 'button', className: 'wp-btn' + (activeTool === 'adjust' ? ' wp-btn-on' : ''), onClick: () => setActiveTool(activeTool === 'adjust' ? '' : 'adjust'), 'aria-expanded': activeTool === 'adjust', 'aria-controls': 'wp-adjust-module', style: { fontSize: 10 } }, '🎚 画面'),
-              h('button', { type: 'button', className: 'wp-btn' + (activeTool === 'filter' ? ' wp-btn-on' : ''), onClick: () => setActiveTool(activeTool === 'filter' ? '' : 'filter'), title: '所有背景类型共用的滤镜与光照', 'aria-expanded': activeTool === 'filter', 'aria-controls': 'wp-filter-module', style: { fontSize: 10 } }, '✦ 滤镜'),
+              h('button', { type: 'button', className: 'wp-btn' + (activeTool === 'effects' ? ' wp-btn-on' : ''), onClick: () => setActiveTool(activeTool === 'effects' ? '' : 'effects'), title: '画面、滤镜与界面材质统一分类设置', 'aria-expanded': activeTool === 'effects', 'aria-controls': 'wp-effects-module', style: { fontSize: 10 } }, '🎚 画面与滤镜'),
               h('button', { type: 'button', className: 'wp-btn' + (musicOn ? ' wp-btn-on' : ''), title: MUSIC_SCOPE_NOTE, onClick: () => setBgMusic(!musicOn), 'aria-pressed': musicOn, style: { fontSize: 10 } }, musicOn ? '🔊 声音开' : '🔇 声音关'),
               h('button', { type: 'button', className: 'wp-btn' + (activeTool === 'settings' ? ' wp-btn-on' : ''), onClick: () => setActiveTool(activeTool === 'settings' ? '' : 'settings'), title: '缓存、同步和使用说明', 'aria-expanded': activeTool === 'settings', 'aria-controls': 'wp-settings-module', style: { fontSize: 10 } }, '⚙ 设置')),
-            h('span', { className: 'wp-control-note' }, '画面用于快速调整；滤镜提供全类型预设、光照与独立调色；所有状态与设置页同步')),
+            h('span', { className: 'wp-control-note' }, filterReady ? '基础画面支持全部类型；滤镜仅图片和视频，播放速度仅视频。' : filterNote)),
           h('span', { className: 'wp-sect-title', title: '背景参数摘要' },
             bg && bg.on
               ? ('透明 ' + Math.round((bg.opacity != null ? bg.opacity : 0.15) * 100) + '% · 对比 ' + (bg.contrast != null ? bg.contrast : 100) + '% · 饱和 ' + (bg.saturate != null ? bg.saturate : 100) + '% · 亮 ' + (bg.brightness != null ? bg.brightness : 100) + '% · 糊 ' + (bg.blur || 0) + 'px')
@@ -1517,7 +1626,8 @@ html, #root, #root > * { background-color: transparent !important; }
           h('button', { className: 'wp-btn', onClick: () => setShowHelp(!showHelp), style: { fontSize: 10, alignSelf: 'flex-start' } }, (showHelp ? '▴ v' : '▾ v') + PLUGIN_VERSION + ' 使用说明'),
           showHelp ? h('div', { style: { fontSize: 10, color: 'var(--wp-mut, #9aa)', lineHeight: '16px' } },
             h('b', {}, 'v' + PLUGIN_VERSION + ' 使用说明与注意事项'),
-            h('div', {}, '• 滤镜与光照支持图片、视频、网页、场景和应用预览；原生场景启用像素滤镜时会自动使用捕获效果层'),
+            h('div', {}, '• 画面与滤镜已合并为一个模块，按基础画面、滤镜与光照、界面材质分类收纳；相同效果只保留一套控件'),
+            h('div', {}, '• 滤镜与三路光照仅支持图片和视频；场景、网页、应用及其他类型会自动禁用，参数保留并在切回支持类型后恢复'),
             h('div', {}, '• 场景壁纸优先实时渲染；静音且已有缓存时秒切播放，原生桥接不可用时才自动后台转码'),
             h('div', {}, '• ⚡ 音频响应 / 🕐 时间显示壁纸固定使用实时渲染，保留音乐律动和实时时间'),
             h('div', {}, '• 声音开关覆盖 DSH 当前视频、网页和场景壁纸；转码缓存无音轨时，开声会自动切回实时场景'),
@@ -1525,72 +1635,47 @@ html, #root, #root > * { background-color: transparent !important; }
             h('div', {}, '• 转码依赖 ffmpeg（可用 FFMPEG 环境变量指定）；未安装时场景壁纸降级为实时捕获'),
             h('div', {}, '• 转码缓存目录可在此修改（或 we.config.json 的 cacheDir/syncDir）；取消订阅的壁纸缓存自动清理'),
             h('div', {}, '• 引擎窗口藏在屏幕外不可见，桌面/界面零干扰；面板可拖动移动、拖边框/四角调整大小'),
-            h('div', {}, '• 黑白主题：标题栏 ☀️/🌙 切换；画面调整：透明度/对比度/饱和度/亮度/模糊'))
+            h('div', {}, '• 基础画面：透明度/亮度/对比度/饱和度/模糊；场景修改非中性参数时使用捕获渲染，恢复默认后返回原生直出'),
+            h('div', {}, '• 一键更新只更新本插件，不替换 DSH 主程序；下载轻量 Release 后会先校验 SHA-256，再运行安装器'))
           : null)
           : null,
-        activeTool === 'filter' ? h('div', { id: 'wp-filter-module', className: 'wp-module-body wp-module-filter', role: 'region', 'aria-label': '滤镜与光照' },
-          h(FilterControls, { fx, bg, compact: true }))
-          : null,
-        activeTool === 'adjust' ? h('div', { id: 'wp-adjust-module', className: 'wp-module-body' },
-          adjRows.map((r) => h('div', { key: r.k, className: 'wp-slider-row' },
-            h('span', {}, r.label),
-            h('input', { type: 'range', min: r.min, max: r.max, value: r.val(), onChange: (e) => r.set(Number(e.target.value)) }),
-            h('b', {}, r.val() + r.suf))),
-          h('div', { className: 'wp-slider-row' },
-            h('span', {}, '面板'),
-            h('input', { type: 'range', min: 0, max: 100, value: panelOpacity, onChange: (e) => setPanelOpacityV(Number(e.target.value)) }),
-            h('b', {}, panelOpacity + '%')),
-          h('div', { className: 'wp-fx-row' },
-            h('span', { className: 'wp-fx-label' }, '材质'),
-            h('div', { className: 'wp-fx-material-grid' }, BG_MATERIALS.map((material) =>
-              h('button', { key: material.id, className: 'wp-material' + (fx.material === material.id ? ' wp-material-on' : ''), onClick: () => setFx({ material: material.id, uiGlass: material.uiGlass }) },
-                h('b', {}, material.name), h('small', {}, material.hint))))),
-          h('div', { className: 'wp-slider-row' },
-            h('span', {}, '材质强度'),
-            h('input', { type: 'range', min: 0, max: 100, value: fx.uiGlass, onChange: (e) => setFx({ uiGlass: Number(e.target.value) }) }),
-            h('b', {}, fx.uiGlass + '%')),
-          h('div', { className: 'wp-fx-row' },
-            h('span', { className: 'wp-fx-label' }, '主色'),
-            h('div', { className: 'wp-tone-swatches' }, ['#4c9aff', '#b8d5ff', '#a78bfa', '#e879a9', '#f59e0b', '#34d399', '#22d3ee', '#18243a'].map((color) =>
-              h('button', { key: color, className: 'wp-tone-swatch' + (fx.color.toLowerCase() === color ? ' wp-tone-swatch-on' : ''), title: color, style: { background: color }, onClick: () => setCustomFx({ color }) }))),
-            h('input', { className: 'wp-tone-color', type: 'color', value: fx.color, title: '自定义主色', onChange: (e) => setCustomFx({ color: e.target.value }) })),
-          h('div', { className: 'wp-fx-row' },
-            h('span', { className: 'wp-fx-label' }, '界面'),
-            h('button', { className: 'wp-btn' + (fx.uiTint ? ' wp-btn-on' : ''), title: '界面染色独立于壁纸效果', onClick: () => setFx({ uiTint: !fx.uiTint }), style: { fontSize: 10 } }, fx.uiTint ? '染色开' : '染色关'),
-            h('button', { className: 'wp-btn' + (fx.uiTintAll ? ' wp-btn-on' : ''), title: '切换界面染色影响范围', onClick: () => setFx({ uiTintAll: !fx.uiTintAll }), style: { fontSize: 10 } }, fx.uiTintAll ? '全界面' : '四个模块')),
-          h('div', { className: 'wp-slider-row' },
-            h('span', {}, '界面强度'),
-            h('input', { type: 'range', min: 0, max: 100, value: fx.uiTintStrength, onChange: (e) => setFx({ uiTintStrength: Number(e.target.value) }) }),
-            h('b', {}, fx.uiTintStrength + '%')),
-          h('div', { className: 'wp-slider-row' },
-            h('span', {}, '背景染色'),
-            h('input', { type: 'range', min: 0, max: 100, value: fx.strength, onChange: (e) => setCustomFx({ strength: Number(e.target.value) }) }),
-            h('b', {}, fx.strength + '%')),
-          h('div', { className: 'wp-slider-row' },
-            h('span', {}, '背景色相'),
-            h('input', { type: 'range', min: -180, max: 180, value: fx.hue, onChange: (e) => setCustomFx({ hue: Number(e.target.value) }) }),
-            h('b', {}, fx.hue + '°')),
-          // 背景效果行（与 DSH 设置页「效果与通道」双向同步）
-          h('div', { className: 'wp-fx-row' },
-            h('span', { className: 'wp-fx-label' }, '背景效果'),
-            h('button', { className: 'wp-btn' + (fx.on ? ' wp-btn-on' : ''), onClick: () => setFx({ on: !fx.on }), style: { fontSize: 10 } }, fx.on ? '开' : '关'),
-            h('button', { className: 'wp-btn' + (fx.mirror ? ' wp-btn-on' : ''), onClick: () => setCustomFx({ mirror: !fx.mirror }), style: { fontSize: 10 } }, '镜像'),
-            h('button', { className: 'wp-btn' + (fx.invert ? ' wp-btn-on' : ''), onClick: () => setCustomFx({ invert: !fx.invert }), style: { fontSize: 10 } }, '反转')),
-          // 动画速度滑块（0-100 → 播放速率 0.5x~1.5x）
-          h('div', { className: 'wp-slider-row' },
-            h('span', {}, '速度'),
-            h('input', { type: 'range', min: 0, max: 100, value: fx.speed, onChange: (e) => setCustomFx({ speed: Number(e.target.value) }) }),
-            h('b', {}, (0.5 + fx.speed / 100).toFixed(1) + 'x')),
-          h('div', { className: 'wp-fx-rgb' },
-            h('span', { className: 'wp-fx-label' }, 'R'),
-            h('input', { type: 'range', min: 0, max: 200, value: fx.rgbR, onChange: (e) => setCustomFx({ rgbR: Number(e.target.value) }) }),
-            h('b', {}, fx.rgbR + '%'),
-            h('span', { className: 'wp-fx-label' }, 'G'),
-            h('input', { type: 'range', min: 0, max: 200, value: fx.rgbG, onChange: (e) => setCustomFx({ rgbG: Number(e.target.value) }) }),
-            h('b', {}, fx.rgbG + '%'),
-            h('span', { className: 'wp-fx-label' }, 'B'),
-            h('input', { type: 'range', min: 0, max: 200, value: fx.rgbB, onChange: (e) => setCustomFx({ rgbB: Number(e.target.value) }) }),
-            h('b', {}, fx.rgbB + '%')))
+        activeTool === 'effects' ? h('div', { id: 'wp-effects-module', className: 'wp-module-body wp-module-effects', role: 'region', 'aria-label': '画面与滤镜' },
+          h(EffectScopeGuide, { bg }),
+          h('details', { className: 'wp-effect-section', open: true },
+            h('summary', {}, h('span', {}, '基础画面'), h('small', {}, '全部背景类型')),
+            h('div', { className: 'wp-effect-section-body' }, h(BasePictureControls, { bg, compact: true }))),
+          h('details', { className: 'wp-effect-section', open: filterReady },
+            h('summary', {}, h('span', {}, '滤镜、光照与动态'), h('small', {}, filterReady ? '当前可用' : '仅图片 / 视频')),
+            h('div', { className: 'wp-effect-section-body' }, h(FilterControls, { fx, bg, compact: true, disabled: !filterReady, disabledReason: filterNote }))),
+          h('details', { className: 'wp-effect-section' },
+            h('summary', {}, h('span', {}, '界面材质'), h('small', {}, '不受壁纸类型限制')),
+            h('div', { className: 'wp-effect-section-body' },
+              h('div', { className: 'wp-slider-row' },
+                h('span', {}, '面板'),
+                h('input', { type: 'range', min: 0, max: 100, value: panelOpacity, onChange: (e) => setPanelOpacityV(Number(e.target.value)) }),
+                h('b', {}, panelOpacity + '%')),
+              h('div', { className: 'wp-fx-row' },
+                h('span', { className: 'wp-fx-label' }, '材质'),
+                h('div', { className: 'wp-fx-material-grid' }, BG_MATERIALS.map((material) =>
+                  h('button', { key: material.id, className: 'wp-material' + (fx.material === material.id ? ' wp-material-on' : ''), onClick: () => setFx({ material: material.id, uiGlass: material.uiGlass }) },
+                    h('b', {}, material.name), h('small', {}, material.hint))))),
+              h('div', { className: 'wp-slider-row' },
+                h('span', {}, '材质强度'),
+                h('input', { type: 'range', min: 0, max: 100, value: fx.uiGlass, onChange: (e) => setFx({ uiGlass: Number(e.target.value) }) }),
+                h('b', {}, fx.uiGlass + '%')),
+              h('div', { className: 'wp-fx-row' },
+                h('span', { className: 'wp-fx-label' }, '共享主色'),
+                h('div', { className: 'wp-tone-swatches' }, ['#4c9aff', '#b8d5ff', '#a78bfa', '#e879a9', '#f59e0b', '#34d399', '#22d3ee', '#18243a'].map((color) =>
+                  h('button', { key: color, className: 'wp-tone-swatch' + (fx.color.toLowerCase() === color ? ' wp-tone-swatch-on' : ''), title: color, style: { background: color }, onClick: () => setCustomFx({ color }) }))),
+                h('input', { className: 'wp-tone-color', type: 'color', value: fx.color, title: '滤镜色罩与界面染色共用主色', onChange: (e) => setCustomFx({ color: e.target.value }) })),
+              h('div', { className: 'wp-fx-row' },
+                h('span', { className: 'wp-fx-label' }, '界面'),
+                h('button', { className: 'wp-btn' + (fx.uiTint ? ' wp-btn-on' : ''), title: '界面染色独立于壁纸效果', onClick: () => setFx({ uiTint: !fx.uiTint }), style: { fontSize: 10 } }, fx.uiTint ? '染色开' : '染色关'),
+                h('button', { className: 'wp-btn' + (fx.uiTintAll ? ' wp-btn-on' : ''), title: '切换界面染色影响范围', onClick: () => setFx({ uiTintAll: !fx.uiTintAll }), style: { fontSize: 10 } }, fx.uiTintAll ? '全界面' : '四个模块')),
+              h('div', { className: 'wp-slider-row' },
+                h('span', {}, '界面强度'),
+                h('input', { type: 'range', min: 0, max: 100, value: fx.uiTintStrength, onChange: (e) => setFx({ uiTintStrength: Number(e.target.value) }) }),
+                h('b', {}, fx.uiTintStrength + '%')))))
           : null,
         selected ? h('div', { className: 'wp-detail' },
           h('div', { className: 'wp-detail-name', title: selected.id }, selected.title),
@@ -1679,6 +1764,8 @@ html, #root, #root > * { background-color: transparent !important; }
       const boot = useBoot()
       const fx = useFx() // 背景效果状态（与面板双向同步；调整即时生效可直接预览）
       const bg = useBg()
+      const filterReady = isFilterAvailable(bg)
+      const filterNote = filterSupportNote(bg)
       const musicOn = useBgMusic()
       const carousel = useCarousel()
       const [savedPresets, setSavedPresets] = React.useState(() => {
@@ -1692,12 +1779,9 @@ html, #root, #root > * { background-color: transparent !important; }
         try { localStorage.setItem('wp-bg-presets', JSON.stringify(items)) } catch (e) { /* ignore */ }
       }
       const applyMaterial = (material) => setFx({ material: material.id, uiGlass: material.uiGlass })
-      const toggleUiMaterial = () => {
-        const material = fx.uiGlass ? BG_MATERIALS[0] : BG_MATERIALS.find((item) => item.id === 'frosted')
-        setFx({ material: material.id, uiGlass: material.uiGlass })
-      }
       const customizeFx = (patch) => setFx(patch)
       const saveCurrentPreset = () => {
+        if (!filterReady) return
         const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         const item = {
           id: Date.now(), name: '方案 ' + time,
@@ -1707,6 +1791,7 @@ html, #root, #root > * { background-color: transparent !important; }
         savePresetList([item].concat(savedPresets).slice(0, 6))
       }
       const loadPreset = (item) => {
+        if (!filterReady) return
         setFx(Object.assign({ speed: 50 }, FILTER_FX_DEFAULTS, item.fx))
         setBgParams(item.bg)
       }
@@ -1714,9 +1799,9 @@ html, #root, #root > * { background-color: transparent !important; }
         h('span', {}, label),
         hint ? h('span', { className: 'wp-set-hint', style: { marginRight: 4 } }, hint) : null,
         h('button', { type: 'button', className: 'wp-btn' + (val ? ' wp-btn-on' : ''), onClick: onToggle, disabled: !!disabled, 'aria-pressed': !!val, style: { fontSize: 11, minWidth: 44 } }, val ? '开' : '关'))
-      const slider = (label, val, min, max, onChange, suffix) => h('div', { className: 'wp-set-row' },
+      const slider = (label, val, min, max, onChange, suffix, disabled) => h('div', { className: 'wp-set-row' },
         h('span', {}, label),
-        h('input', { className: 'wp-set-range', type: 'range', min, max, value: val, onChange: (e) => onChange(Number(e.target.value)) }),
+        h('input', { className: 'wp-set-range', type: 'range', min, max, value: val, disabled: !!disabled, onChange: (e) => onChange(Number(e.target.value)) }),
         h('b', { className: 'wp-set-num' }, String(val) + (suffix || '')))
       const disclosure = (title, open, ...body) => h('details', { className: 'wp-set-section wp-set-disclosure', open },
         h('summary', { className: 'wp-set-section-title' }, title),
@@ -1749,7 +1834,8 @@ html, #root, #root > * { background-color: transparent !important; }
       // 背景预览卡片（仿悬浮窗：圆角+边框+阴影；实时反映注入壁纸，效果随调整即时更新）
       // 优先使用预览图；视频编码可能不受 WebView 支持，只有无预览图时才回退到原视频。
       const it = collSel || (bg && bg.on ? bg.item : null)
-      const previewAtmosphere = atmosphereStyles(fx)
+      const previewFilterReady = !!(filterReady && isFilterSupported(it))
+      const previewAtmosphere = atmosphereStyles(previewFilterReady ? fx : null)
       const preview = h('div', { className: 'wp-fx-preview' + (collSel ? ' wp-fx-preview-zoom' : '') },
         !it ? h('div', { className: 'wp-fx-preview-empty' }, '尚未注入壁纸背景——注入后此处实时预览效果')
           : (it.previewUrl
@@ -1757,7 +1843,7 @@ html, #root, #root > * { background-color: transparent !important; }
             : (it.type === 'video' && it.mediaUrl
               ? h('video', { id: 'wp-fx-preview-img', src: it.mediaUrl, autoPlay: true, muted: true, loop: true, playsInline: true })
               : h('div', { className: 'wp-fx-preview-empty' }, '该壁纸暂无预览'))),
-        fx.on && fx.strength > 0 ? h('span', { className: 'wp-fx-preview-overlay', style: { background: fx.color, opacity: Math.min(1, Math.max(0, fx.strength / 100)) } }) : null,
+        previewFilterReady && fx.on && fx.strength > 0 ? h('span', { className: 'wp-fx-preview-overlay', style: { background: fx.color, opacity: Math.min(1, Math.max(0, fx.strength / 100)) } }) : null,
         previewAtmosphere.active ? h(React.Fragment, null,
           h('span', { className: 'wp-fx-preview-overlay', style: previewAtmosphere.light }),
           h('span', { className: 'wp-fx-preview-overlay', style: previewAtmosphere.vignette }),
@@ -1794,30 +1880,40 @@ html, #root, #root > * { background-color: transparent !important; }
       return h('div', { style: { padding: '4px 2px' } },
         h('div', { className: 'wp-release-note' },
           h('b', {}, 'v' + PLUGIN_VERSION),
-          h('span', {}, '本次更新：新增全类型滤镜与光照调色台，所有效果与悬浮窗实时同步。')),
+          h('span', {}, '本次更新：画面与滤镜统一适配，并新增经 SHA-256 校验的插件一键更新。')),
         disclosure('v' + PLUGIN_VERSION + ' 使用说明与注意事项', true,
           h('ol', { className: 'wp-version-notes' },
             [
-              '面板由顶部拉绳或侧栏入口展开；主操作按“背景 / 工具”分组，画面与设置模块互斥收纳，壁纸合集从面板侧边展开。',
+              '面板由顶部拉绳或侧栏入口展开；“画面与滤镜”按适用范围统一分类并分组收纳，壁纸合集从面板侧边展开。',
               '主面板和设置页共用同一声音状态；视频、网页和实时场景随开关同步，图片、应用预览及无音轨转码缓存不会发声。',
               '开启声音时，场景会使用实时渲染；关闭声音且已有转码缓存时优先秒切缓存，桥接不可用时仍保留自动转码与实时捕获回退。',
               '实时场景需要 Wallpaper Engine 与原生桥接；转码需要 FFmpeg。音频响应和时间类场景保持实时渲染，以保留完整效果。',
               '插件不调用 Wallpaper Engine 全局静音。视频/网页声音仅在 DSH 内控制；实时场景按窗口所属音频进程控制，若引擎复用同一进程可能联动桌面声音。',
               '正常退出 DSH 时会关闭 DSH 专用的实时场景窗口与音效，不会停止 Wallpaper Engine 的桌面壁纸。',
-              '滤镜与光照支持图片、视频、网页、场景和应用预览；提供 8 套方案，以及色温、通道、光源、暗角和颗粒等独立调整。',
-              '原生实时场景使用像素滤镜时会自动叠加捕获效果层；恢复中性滤镜后回到原生直出。动画速度仅对动态视频有意义。',
+              '滤镜与光照仅支持图片和视频；场景、网页、应用及其他类型会自动禁用，已保存参数不会丢失，切回图片或视频后自动恢复。',
+              '基础画面调整仍按原方式工作；滤镜提供 8 套方案、色温、通道、三路独立光源、暗角和颗粒，播放速度仅对视频有效。',
+              '安装后可从开始菜单或稳定运行目录执行一键更新；更新器只获取官方仓库的轻量 Release，不需要 Token 或 Cookie，并在安装前校验 SHA-256。',
+              '一键更新只更新壁纸插件与桥接运行文件，不替换 DSH 主程序；需要更新定制 DSH 外壳时必须使用单独审核的完整包。',
             ].map((note, index) => h('li', { key: 'note-' + index }, note)))),
         disclosure('启动与声音', true,
           row('壁纸插件（启用后侧边栏显示「壁纸」入口）', boot.enabled, () => setEnabled(!boot.enabled), ''),
           row('随 DSH 启动自动展开壁纸面板', boot.autostart, () => setAutostart(!boot.autostart), ''),
           row('启动时以上次注入的壁纸载入背景', boot.restoreBg, () => setRestoreBg(!boot.restoreBg), ''),
           row('DSH 壁纸声音', musicOn, () => setBgMusic(!musicOn), MUSIC_SCOPE_NOTE)),
-        // 背景效果（集中实时调整，即时生效可直接预览；面板「画面调整」区同样可调）
+        // 背景效果集中实时调整；面板「画面与滤镜」共用同一状态。
         h('div', { className: 'wp-set-group' },
           h('div', { className: 'wp-set-group-title' }, '背景效果'),
-          h('div', { className: 'wp-set-group-sub' }, '调整即时生效，可直接预览当前注入的背景；与面板「画面调整」区双向同步'),
+          h('div', { className: 'wp-set-group-sub' }, '画面与滤镜共用一套参数；基础画面支持全部类型，专属滤镜按背景类型自动启用'),
           preview,
           collArea,
+          disclosure('画面与滤镜', false,
+            h(EffectScopeGuide, { bg }),
+            h('details', { className: 'wp-effect-section', open: true },
+              h('summary', {}, h('span', {}, '基础画面'), h('small', {}, '全部背景类型')),
+              h('div', { className: 'wp-effect-section-body' }, h(BasePictureControls, { bg, compact: false }))),
+            h('details', { className: 'wp-effect-section', open: filterReady },
+              h('summary', {}, h('span', {}, '滤镜、光照与动态'), h('small', {}, filterReady ? '当前可用' : '仅图片 / 视频')),
+              h('div', { className: 'wp-effect-section-body' }, h(FilterControls, { fx, bg, compact: false, disabled: !filterReady, disabledReason: filterNote })))),
           disclosure('背景轮播', false,
             row('启用背景轮播', carousel.on, () => setCarousel({ on: !carousel.on }), carousel.selectedIds.length ? '仅切换已勾选壁纸' : '请先在背景合集勾选壁纸', !carousel.selectedIds.length),
             h('div', { className: 'wp-set-row' },
@@ -1841,36 +1937,29 @@ html, #root, #root > * { background-color: transparent !important; }
             slider('材质强度', fx.uiGlass, 0, 100, (v) => setFx({ uiGlass: v }), '%')),
           disclosure('主色与界面', false,
             h('div', { className: 'wp-tone-picker' },
-              h('span', {}, '色盘'),
+              h('span', {}, '共享主色'),
               h('div', { className: 'wp-tone-swatches' }, ['#4c9aff', '#b8d5ff', '#a78bfa', '#e879a9', '#f59e0b', '#34d399', '#22d3ee', '#18243a'].map((color) =>
                 h('button', { key: color, className: 'wp-tone-swatch' + (fx.color.toLowerCase() === color ? ' wp-tone-swatch-on' : ''), title: color, style: { background: color }, onClick: () => customizeFx({ color }) }))),
-              h('input', { className: 'wp-tone-color', type: 'color', value: fx.color, title: '自定义主色', onChange: (e) => customizeFx({ color: e.target.value }) })),
+              h('input', { className: 'wp-tone-color', type: 'color', value: fx.color, title: '滤镜色罩与界面染色共用主色', onChange: (e) => customizeFx({ color: e.target.value }) })),
+            h('div', { className: 'wp-set-hint' }, '该颜色同时供图片/视频色罩与界面染色使用；两者的开关和强度保持独立。'),
             row('界面染色', fx.uiTint, () => setFx({ uiTint: !fx.uiTint }), '独立于壁纸效果；' + (fx.uiTintAll ? '当前影响全界面' : '当前仅影响侧栏、Cordis 面板、设置和输入框')),
             h('div', { className: 'wp-set-row' },
               h('span', {}, '界面范围'),
               h('span', { className: 'wp-set-hint', style: { marginRight: 4 } }, '全界面模式只改变表面底色，保留按钮状态色'),
               h('button', { className: 'wp-btn' + (fx.uiTintAll ? ' wp-btn-on' : ''), onClick: () => setFx({ uiTintAll: !fx.uiTintAll }), style: { fontSize: 11, minWidth: 64 } }, fx.uiTintAll ? '全界面' : '四个模块')),
-            slider('界面染色强度', fx.uiTintStrength, 0, 100, (v) => setFx({ uiTintStrength: v }), '%'),
-            slider('壁纸主色覆盖', fx.strength, 0, 100, (v) => customizeFx({ strength: v }), '%')),
-          disclosure('滤镜与光照', false,
-            h(FilterControls, { fx, bg, compact: false })),
-          disclosure('动态视频', false,
-            slider('视频播放速度', fx.speed, 0, 100, (v) => customizeFx({ speed: v }), ' → ' + (0.5 + fx.speed / 100).toFixed(1) + 'x'),
-            h('div', { className: 'wp-set-hint' }, '仅对视频或场景转码视频有效；静态图片不存在播放速度。')),
+            slider('界面染色强度', fx.uiTintStrength, 0, 100, (v) => setFx({ uiTintStrength: v }), '%')),
           disclosure('自定义方案', false,
             h('div', { className: 'wp-preset-actions' },
               h('span', {}, '保存当前壁纸调色，最多保留 6 个方案'),
-              h('button', { className: 'wp-btn', onClick: saveCurrentPreset, style: { fontSize: 10 } }, '保存当前方案')),
+              h('button', { className: 'wp-btn', disabled: !filterReady, title: filterNote, onClick: saveCurrentPreset, style: { fontSize: 10 } }, '保存当前方案')),
             savedPresets.length
               ? h('div', { className: 'wp-preset-list' }, savedPresets.map((item) =>
                 h('div', { className: 'wp-preset-item', key: item.id },
-                  h('button', { className: 'wp-preset-load', title: '载入 ' + item.name, onClick: () => loadPreset(item) }, item.name),
+                  h('button', { className: 'wp-preset-load', disabled: !filterReady, title: filterReady ? '载入 ' + item.name : filterNote, onClick: () => loadPreset(item) }, item.name),
                   h('button', { className: 'wp-preset-delete', title: '删除', onClick: () => savePresetList(savedPresets.filter((preset) => preset.id !== item.id)) }, '×'))))
               : h('div', { className: 'wp-set-hint' }, '还没有保存的方案'),
-            h('div', { style: { display: 'flex', justifyContent: 'space-between', gap: 8, paddingTop: 10 } },
-              h('button', { className: 'wp-btn' + (fx.uiGlass ? ' wp-btn-on' : ''), onClick: toggleUiMaterial, style: { fontSize: 10 } }, fx.uiGlass ? '关闭界面材质' : '开启界面材质'),
-              h('button', { className: 'wp-btn', onClick: resetFilters, style: { fontSize: 10 } }, '重置滤镜'),
-              h('button', { className: 'wp-btn', onClick: () => { resetFx(); setBgParams({ opacity: .15, brightness: 100, contrast: 100, saturate: 100, blur: 0 }) }, style: { fontSize: 10 } }, '恢复默认')))))
+            h('div', { style: { display: 'flex', justifyContent: 'flex-end', paddingTop: 10 } },
+              h('button', { className: 'wp-btn', onClick: () => { resetFx(); setBgParams({ opacity: .15, brightness: 100, contrast: 100, saturate: 100, blur: 0 }) }, style: { fontSize: 10 } }, '恢复全部默认')))))
     }
     slots.inject('settings.section', () => slots.register(
       { name: 'settings.section', id: 'wallpaper.settings', order: 150, label: 'wallpaper接入设置' },

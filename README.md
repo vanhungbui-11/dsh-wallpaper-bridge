@@ -40,7 +40,15 @@ DSH Wallpaper Bridge 是本地桥接插件，不是壁纸资源库，也不替�
 
 ## 版本状态
 
-当前发布版本：**0.3.0**
+当前版本：**0.3.1**
+
+### 0.3.1 更新
+
+- 悬浮窗与设置页将“画面”和“滤镜”合并为一个可展开模块，按基础画面、滤镜/光照/动态和界面材质分类，移除重复控件。
+- 基础画面的透明度、亮度、对比度、饱和度和模糊保留全类型支持；8 套滤镜、色温、RGB、色罩、三路光照、暗角和颗粒仅支持图片与视频，播放速度仅支持视频，不适用时会禁用对应子组并保留参数。
+- 修复场景注入、声音同步及 DSH 退出后的场景引擎清理问题；场景修改基础画面参数时按原有捕获渲染路径工作。
+- 新增经 SHA-256 校验的一键插件更新入口；更新器固定读取本项目 GitHub Release，不读取账号 Token、Cookie，也不自动重试或轮询。
+- 发布流程改为文件白名单并增加隐私、压缩包内容、离线安装与离线更新回归检查；公开候选包不含运行状态、缓存、日志、`node_modules` 或本机绝对路径。
 
 ### 0.3.0 更新
 
@@ -79,45 +87,46 @@ DSH Wallpaper Bridge 是本地桥接插件，不是壁纸资源库，也不替�
 - Cordis 侧栏入口、插件悬浮窗、设置页和独立自动加载器。
 - 图片、视频、网页以及 Wallpaper Engine 项目的发现、筛选、预览、手动注入与取消。
 - 画面调节、材质、主色调、轮播清单和上次背景恢复配置。
-- 完整安装包：安装独立的定制 DSH，不覆盖未知版本的既有 DSH。
+- 本地完整安装包：安装独立的定制 DSH，不覆盖未知版本的既有 DSH；因包含 DSH 自带运行依赖，仅输出到 `dist-local/`，不得作为本项目公开候选包。
 - 安装后使用稳定运行目录，不依赖解压目录；更新时只迁移本插件的旧启动项，并备份被修改的本地配置。
 
 ### 已知限制 / 试验性能力
 
 - **场景类（3D）壁纸的原生实时层仍是试验性能力。** 浏览器无法直接渲染 Wallpaper Engine 私有场景格式，因此依赖 Wallpaper Engine、原生桥接与显卡环境协作；不同 GPU、驱动、壁纸项目可能出现白屏、闪烁或不可用。遇到此类情况请取消注入或改用视频/图片壁纸。
-- 场景实时层、沉浸式全屏需要使用本项目的**完整包**和配套定制 DSH；轻量安装只保证 Cordis 插件层的兼容性。
+- 场景实时层、沉浸式全屏需要配套定制 DSH；公开轻量包只更新 Cordis 插件和桥接运行文件。完整 DSH 包只能在确认第三方依赖与许可证后本地构建。
 - 新设备必须自行安装 Wallpaper Engine，并登录拥有订阅的 Steam 账号，或复制自己拥有的本地壁纸文件。项目不会分发工坊内容。
 - 不会迁移个人的壁纸清单、已选轮播清单、缓存、运行状态和本地路径；新设备安装后需要重新扫描、选择或导入自己的配置。
 
 ## 快速安装
 
-### 推荐：完整包
+### 公开候选：插件一键安装
 
-完整包适合换设备或需要场景实时层、沉浸式全屏的情况。
+适用于已经安装兼容 DSH 的设备。公开候选只包含本项目代码与必要 Helper，不携带 DSH、Wallpaper Engine、壁纸资源、`node_modules` 或本机运行数据。
 
-1. 从 [v0.3.0 Release](https://github.com/vanhungbui-11/dsh-wallpaper-bridge/releases/tag/v0.3.0) 下载 `DSH-Wallpaper-Setup-Full-0.3.0.zip` 及对应 `.sha256` 文件。
+1. 发布后从[最新 Release](https://github.com/vanhungbui-11/dsh-wallpaper-bridge/releases/latest)下载 `DSH-Wallpaper-Setup-0.3.1.zip` 及同名 `.sha256` 文件。
 2. 校验 SHA-256 后解压到任意临时目录，双击 `install.cmd`。
-3. 安装器会复制独立 DSH、安装壁纸桥接文件、注册 Cordis 自动加载器，并创建 `DeepSeek Harness Wallpaper` 快捷方式。
-4. 若已有 DSH 正在运行，关闭后从新快捷方式重新打开一次；若没有运行中的 DSH，安装器会直接启动它。
-5. 打开 Cordis Plugin 面板，确认“壁纸引擎控制”运行中；侧栏和右上角的“壁纸”入口即可打开悬浮窗与设置页。
+3. 安装器会把桥接运行文件复制到 `%LOCALAPPDATA%\DSHWallpaperBridge\current`，注册 Cordis 自动加载器，并在开始菜单创建 `Update DSH Wallpaper Bridge` 更新入口。
+4. 重启 DSH，打开 Cordis Plugin 面板确认“壁纸引擎控制”运行中；侧栏和顶部拉绳均可打开悬浮窗。
 
-公开完整包已排除本机路径、账号配置、会话、日志、壁纸清单与缓存。包内的 DSH、Electron、Node.js 及其他依赖仍分别受其自身许可证约束。安装器不会覆盖正在运行的同一份独立 DSH；关闭它后再次运行安装器即可更新。
+也可直接从源码目录运行 `install.cmd` 或 `node install.js`。重复安装是幂等更新：只迁移本插件旧入口，保留其他插件，并在修改本地配置前创建备份。
 
-### 已有兼容 DSH：轻量安装
+### 一键更新
 
-从源码目录或轻量包运行：
-
-```powershell
-./install.cmd
-```
-
-或：
+安装后从开始菜单运行 `Update DSH Wallpaper Bridge`，或双击稳定运行目录中的 `update.cmd`。更新器只执行一次 GitHub 最新 Release 查询，下载与版本号严格匹配的轻量 ZIP 和 `.sha256`，校验后再调用同一安装器；遇到限流会停止并提示稍后重试。
 
 ```powershell
-node install.js
+& "$env:LOCALAPPDATA\DSHWallpaperBridge\current\update.cmd"
 ```
 
-轻量安装会把运行文件复制到 `%LOCALAPPDATA%\DSHWallpaperBridge\current`，并把插件注册到当前用户的 DSH 配置目录。重启 DSH 后生效。
+一键更新只更新本插件、Cordis 文件与桥接 Helper，不替换 DSH 主程序。需要离线更新时，下载 ZIP 和相邻 `.sha256` 后运行：
+
+```powershell
+./update.ps1 -PackagePath './DSH-Wallpaper-Setup-0.3.1.zip'
+```
+
+### 完整 DSH 一键安装（仅本地）
+
+现有完整 DSH 必须携带它自己的 Node/Electron 运行依赖，其中包含 `runtime/node_modules`。这与“公开候选不得包含 `node_modules`”的要求冲突，因此完整包保留为**本地专用构建**，输出到 `dist-local/`，不会进入公开候选目录 `dist/`。只有在确认 DSH 来源、第三方许可证与分发权限后才能单独处理。
 
 ### 从源码构建安装包
 
@@ -126,19 +135,21 @@ node install.js
 ```powershell
 npm run check
 npm run package:portable
+npm run check:release
 
-# 完整包需要传入已验证的定制 DSH 目录
-./release.ps1 -Full -HarnessDir 'D:\Path\To\DeepSeek Harness'
+# 本地完整包需要显式确认它会携带 DSH 运行依赖
+./release.ps1 -Full -AllowBundledRuntimeDependencies -HarnessDir 'D:\Path\To\DeepSeek Harness'
 ```
 
-也可设置一次环境变量后执行 `npm run package:full`：
+也可设置一次环境变量后执行本地完整构建：
 
 ```powershell
 $env:DSH_HARNESS_DIR = 'D:\Path\To\DeepSeek Harness'
 npm run package:full
+npm run check:full-local
 ```
 
-产物位于 `dist/`，该目录不进入 Git 仓库。
+公开轻量候选位于 `dist/`；本地完整包位于 `dist-local/`。两个目录均不进入 Git 仓库，且发布检查会拒绝 `dist/` 中出现任何完整 DSH ZIP。
 
 ## 首次使用
 
@@ -157,7 +168,7 @@ npm run package:full
 | DSH Client | `dsh/plugin.client.js` | 侧栏入口、悬浮窗、集合卡片、设置与视觉效果。 |
 | 自动加载 | `dsh/wallpaper-bootstrap.js` | 基于代码摘要复用或更新本插件，不影响其他 Cordis 插件。 |
 | 场景桥接 | `native-scene-bridge.js`、`we-tools/SceneLayerHost.cs` | 在完整定制 DSH 中提供原生场景层实验能力。 |
-| 安装/发布 | `install.ps1`、`release.ps1` | 稳定安装、备份迁移、完整包与 SHA-256 校验。 |
+| 安装/更新/发布 | `install.ps1`、`update.ps1`、`release.ps1` | 稳定安装、备份迁移、固定仓库更新、白名单打包与 SHA-256 校验。 |
 
 ## 目录清单
 
@@ -166,6 +177,7 @@ npm run package:full
 ├── we.js                         # Wallpaper Engine 控制 CLI
 ├── native-scene-bridge.js        # 原生场景桥接服务
 ├── install.cmd / install.ps1     # 一键安装入口
+├── update.cmd / update.ps1       # 固定官方 Release 的一键插件更新
 ├── install.js                    # DSH 配置与稳定运行目录安装
 ├── release.ps1                   # 生成轻量包/完整包
 ├── package.json                  # 命令与版本
@@ -186,8 +198,8 @@ npm run package:full
 ## 验证与排错
 
 ```powershell
-npm run check            # 客户端、Host、自动加载器、安装迁移
-npm run check:release    # 轻量发布包解压/安装/独立运行验证
+npm run check            # 隐私、客户端、Host、自动加载器、更新器与安装迁移
+npm run check:release    # 包内容、哈希、解压、安装、离线更新与独立运行验证
 node we.js detect        # 检查 Wallpaper Engine 发现结果
 node we.js list          # 查看当前机器的本地壁纸清单
 ```
@@ -206,9 +218,9 @@ node we.js list          # 查看当前机器的本地壁纸清单
 
 以下内容已在 `.gitignore` 与发布脚本中排除，提交前仍请自行复核：
 
-- `wallpapers.json`、`runtime.json`、`we.config.json`、`titles.local.json`、转码缓存和安装备份；
+- `wallpapers.json`、`runtime.json`、`we.config.json`、`titles.local.json`、`.env*`、转码缓存和安装备份；
 - Steam/DSH 会话数据、Cookie、Token、聊天内容、用量记录和运行日志；
-- 本机绝对路径、Wallpaper Engine 工坊资源、本地导入壁纸，以及用户自己的 DSH 配置与会话数据。
+- 本机绝对路径、`node_modules`、Wallpaper Engine 工坊资源、本地导入壁纸，以及用户自己的 DSH 配置与会话数据。
 
 ### 本机修改范围
 
@@ -216,6 +228,26 @@ node we.js list          # 查看当前机器的本地壁纸清单
 - 安装器只写入本插件的稳定运行目录与 DSH 插件配置；迁移旧启动项前会创建备份。建议在更新前关闭正在运行的 DSH，并保留备份直到确认运行正常。
 
 如需分享截图、日志或配置，请先移除用户名、绝对路径、壁纸标题、工作区名称和会话内容。
+
+## 发布前检查与 GitHub 使用注意
+
+本项目不会自动创建提交、Tag、Release 或上传文件。准备发布时应先确认目标仓库，再按一次版本、一次检查、一次 Release 的节奏操作：
+
+```powershell
+git remote -v
+git status --short --ignored
+npm run check
+npm run package:portable
+npm run check:release
+tar -tf "dist/DSH-Wallpaper-Setup-0.3.1.zip"
+```
+
+- 只上传 `dist/DSH-Wallpaper-Setup-0.3.1.zip` 和对应 `.sha256`；不要上传 `dist-local/`、源码工作区压缩包、旧完整包或任何本机配置。
+- 不要把 GitHub Token、Cookie 或密码写进脚本、命令历史、仓库文件或 Release 说明；需要登录时使用 GitHub 官方凭据存储或网页会话。
+- 不进行高频轮询、反复删除/重建 Release 或密集推送。[GitHub 仓库限制](https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits)建议单一仓库每分钟不超过 6 次推送；遇到 API `403`/`429` 后应停止并等待，不要持续重试，详见 [REST API 限流说明](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)。
+- Git 单个对象超过 100 MiB 会被阻止；较大的合法二进制应使用 Release 资产而非 Git 历史，详见 [GitHub 大文件说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)。当前公开候选仍应保持轻量并通过上述内容检查。
+- 隐私脚本检查当前可发布文件和安装包，但不会改写既有 Git 提交元数据；首次公开前还应确认历史作者邮箱是否使用 GitHub `noreply`。清理旧邮箱需要重写历史并单独评估。
+- 上传前再次核对 `origin`，因为本地可能同时存在迁移前后的远端地址；未经明确确认不要向任一远端推送。
 
 ## 许可证
 
