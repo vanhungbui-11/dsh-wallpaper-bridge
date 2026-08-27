@@ -229,25 +229,6 @@ node we.js list          # 查看当前机器的本地壁纸清单
 
 如需分享截图、日志或配置，请先移除用户名、绝对路径、壁纸标题、工作区名称和会话内容。
 
-## 发布前检查与 GitHub 使用注意
-
-本项目不会自动创建提交、Tag、Release 或上传文件。准备发布时应先确认目标仓库，再按一次版本、一次检查、一次 Release 的节奏操作：
-
-```powershell
-git remote -v
-git status --short --ignored
-npm run check
-npm run package:portable
-npm run check:release
-tar -tf "dist/DSH-Wallpaper-Setup-0.3.1.zip"
-```
-
-- 只上传 `dist/DSH-Wallpaper-Setup-0.3.1.zip` 和对应 `.sha256`；不要上传 `dist-local/`、源码工作区压缩包、旧完整包或任何本机配置。
-- 不要把 GitHub Token、Cookie 或密码写进脚本、命令历史、仓库文件或 Release 说明；需要登录时使用 GitHub 官方凭据存储或网页会话。
-- 不进行高频轮询、反复删除/重建 Release 或密集推送。[GitHub 仓库限制](https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits)建议单一仓库每分钟不超过 6 次推送；遇到 API `403`/`429` 后应停止并等待，不要持续重试，详见 [REST API 限流说明](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)。
-- Git 单个对象超过 100 MiB 会被阻止；较大的合法二进制应使用 Release 资产而非 Git 历史，详见 [GitHub 大文件说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)。当前公开候选仍应保持轻量并通过上述内容检查。
-- 隐私脚本检查当前可发布文件和安装包，但不会改写既有 Git 提交元数据；首次公开前还应确认历史作者邮箱是否使用 GitHub `noreply`。清理旧邮箱需要重写历史并单独评估。
-- 上传前再次核对 `origin`，因为本地可能同时存在迁移前后的远端地址；未经明确确认不要向任一远端推送。
 
 ## 许可证
 
